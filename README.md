@@ -1,5 +1,7 @@
 ant3012
 ==========
 
-3D Modeling and Texturing Fall 2013
+[Course Website](http://jiharu.github.io/ant3012/)
+
+3D Modeling and Texturing Fall 2013  
 Art & Technology, Sogang University
