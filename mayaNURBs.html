@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>3D Modeling and Texturing</title>
+    
+<link href="css/site.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="css/highlight.default.css" media="screen" rel="stylesheet" type="text/css" />
+  
+<script src="js/jquery.js"></script>
+<script src="js/showdown.js" type="text/javascript"></script>
+
+<link rel="icon" type="image/x-icon" href="favicon.ico" />
+</head>
+<body>
+<!--
+Write the markdown code below.
+A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
+-->
+
+<div style="display: none" id="sourcetext">
+
+# Maya modeling workshop
+
+- Survey
+
+## Preparation for the project
+
+>- Project set-up: Choose File ⇒ Project ⇒ New to create a new project.    
+>- Open the new scene: save the scene file often!
+>- Preference Set-up: undo
+>- View Window
+	- Perspective View + Orthographic View
+	- Tumble, Track, Dolly Tool (Alt (option) + Mouse Button (left, middle, right button))    
+  	- View panel change (Space Bar or check the left area layout) : Single View vs. Four View
+>- Manipulator & Pivot (insert Key or fn + left arrow key)
+>- View panel
+	- Outliner
+	- Hypergraph/ Transform, Shape Node
+>- Hierarchy relation: Group vr. Parent
+
+## Basic Modeling
+
+#### Sketch
+![bam01](img/maya/nurbs/skech.png)   
+![bam02](img/maya/nurbs/sbox01.png)
+
+#### NURBS (Non-Uniform Rational B-Splines)
+[NURBS overview](http://download.autodesk.com/global/docs/maya2014/en_us/)
+
+	cv curve tool, ep curve tool, make surface (you can do rendering)    
+	Start of curve, curve direction, cv(control vertex), ep (edit point), hull, span    
+Modify curve: f8 key or using Marking menu with mouse right button or curve history
+
+![nbs01](img/maya/nurbs/nurbs01.png)
+![nrbs02](img/maya/nurbs/curve.png)
+![nrbs03](img/maya/nurbs/nurbs.png)
+![nrbs04](img/maya/nurbs/curve01.png)
+![nrbs05](img/maya/nurbs/surface.png)
+
+
+
+## Creating Wine glass
+
+![w01](img/maya/nurbs/wine.png)   
+![w02](img/maya/nurbs/wine.jpg)    
+![w03](img/maya/nurbs/Tywine.png)    
+![w04](img/maya/nurbs/revolve.png) 
+
+## Creating apple
+
+![ap01](img/maya/nurbs/apple.png)  
+
+
+### Homework
+- Finish your first NURBS modeling, develop it and submit it to Tumblr. 
+
+### Next Class
+- Polygon modeling
+
+</div>
+<div id="wrapper">
+	
+	<div class="header">
+		
+		<h1>ANT3012</h1>		
+		<a href="index.html">Overview</a><br/>
+		<a href="modelingSyllabus.pdf">Syllabus</a><br/>
+		<!--<a href="intro.html">Introduction</a><br/>
+		<a href="mayafundt.html">Maya fundamental</a><br/>--> 
+		<a href="mayaNURBS.html">Maya Oct 02</a><br/>
+
+
+	</div>
+	<div class="section">
+		<script type="text/javascript">
+		//var converter = new Markdown.Converter();
+		var converter = new Showdown.converter();
+		document.write(converter.makeHtml($('#sourcetext').text()));
+		</script>
+	</div>
+	
+	<div class="footer">HyunKyung (Haru) Ji, 2013</div>
+	
+</div>
+</body>
+</html>
