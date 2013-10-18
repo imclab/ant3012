@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>3D Modeling and Texturing</title>
+    
+<link href="css/site.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="css/highlight.default.css" media="screen" rel="stylesheet" type="text/css" />
+  
+<script src="js/jquery.js"></script>
+<script src="js/showdown.js" type="text/javascript"></script>
+
+<link rel="icon" type="image/x-icon" href="favicon.ico" />
+</head>
+<body>
+<!--
+Write the markdown code below.
+A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
+-->
+
+<div style="display: none" id="sourcetext">
+
+[Maya 2014 online Help](http://download.autodesk.com/global/docs/maya2014/en_us/) 
+# Maya Shading
+## Lighting
+### Indirect (global) vs. direct illumination	
+![gl01](img/maya/shading/gl.png)
+
+Indirect (Global illumination)light is all the inter-reflected light in a scene. Global illumination is an approximation of real-world indirect light transmission.
+
+Direct (local) illumination is only the light provided directly from a light source (such as a spot light). Direct light is emitted from a light source and travels in a straight path to the illuminated point.
+
+![gl02](img/maya/shading/illum.png)
+
+Ray tracing is a technique for generating an image by tracing the path of light through pixels in an image plane and simulating the effects of its encounters with virtual objects. The technique is capable of producing a very high degree of visual realism, usually higher than that of typical scanline rendering methods, but at a greater computational cost.[-wikipedia](http://en.wikipedia.org/wiki/Ray_tracing_(graphics))
+
+### Cornell box
+![cl01](img/maya/shading/cornell.png)
+
+The Cornell box is a test aimed at determining the accuracy of rendering software by comparing the rendered scene with an actual photograph of the same scene, and has become a commonly used 3D test model. [-wikipedia](http://en.wikipedia.org/wiki/Cornell_Box) 
+
+Cornell box lighting examples: [1](http://courses.cs.washington.edu/courses/cse557/08wi/projects/final/artifacts/jjohn-isdal/), [2](http://courses.cs.washington.edu/courses/cse557/08wi/projects/final/artifacts/jjohn-isdal/)
+		
+### Light sources in Maya		
+Maya has a number of light sources that let you achieve a wide variety of lighting effects.
+By default, Maya scenes do not contain light sources. However, Maya’s default lighting helps you to visualize objects in Shaded display in the scene view (press 5). If you turn default lighting off and have no lights in the scene, the scene appears black (see Default lighting in Maya for more information). By controlling its intensity, color and direction, light becomes a key factor in creating a scene in Maya.
+With Maya, you have much more control over the placement, intensity, and characteristics of lights than you do with real-world lights. Shadows, specular highlights, diffuse, and glow all contribute to how light affects a scene.
+
+![light01](img/maya/shading/mayalight.png)
+![light02](img/maya/shading/lights.png)
+
+Light Attribute Editor
+
+![light03](img/maya/shading/light.png)
+![light04](img/maya/shading/spotlight.png)
+
+#### Absorption, reflection, and refraction of light (Lighting and Shading > Lighting > Basics of Lighting > - [Maya Help](http://download.autodesk.com/global/docs/maya2014/en_us/)  ) 
+
+The color of the objects we see in the natural world is a result of the way objects interact with light. When a light wave strikes an object, it can be absorbed, reflected, or refracted by the object. All objects have a degree of reflection and absorption.
+
+![light05](img/maya/shading/lightwave.png)
+Image from http://physics.tutorvista.com/light.html
+
+![light06](img/maya/shading/diffuseplus.png)
+![light07](img/maya/shading/refractionplus.png)
+
+#### Light Decay (Lighting and Shading > Lighting > Basics of Lighting > Direct light sources > )
+
+In the real world, a light’s brightness is strongest at the light source and decreases or decays further away from the light source. In Maya, a light’s brightness decays only if decay is turned on (see Decay Rate). The light’s color, however, remains the same no matter how far it is from the light source.
+
+![decay01](img/maya/shading/decay.png)
+
+You can also create decay effects not seen in the real world (only for a Spot light in Maya). For example, you can use a custom Intensity curve to make a spot light’s brightness increase further away from the light source, or you can use a custom Color curve to make the color of a spot light change with distance.
+
+![decay02](img/maya/shading/decay01.png)
+
+### Creating Shadows
+- Define from light sources
+
+![shadow01](img/maya/shading/shadow.png)
+## Materials
+### Creating Materials and Textures	
+
+Different materials
+![mat02](img/maya/shading/material.png)
+
+![mat02_01](img/maya/shading/metal.png)
+![mat02_02](img/maya/shading/specDif.png)
+
+Maya material attribute editor and how to link textures
+![mat03](img/maya/shading/shader.png)
+![mat04](img/maya/shading/shading.png)
+
+Hypershade Editor
+![mat01](img/maya/shading/hypershade.png)
+
+## Making
+1. Preparing Cornell Box: practice with Lighting and Materials using Layer Editor
+[Reference](http://members.shaw.ca/mayaforall/Maya%20Beginners/BG%20Programs/BG%20Resources/Part_07/corn_box_light.htm)
+
+## Review
+- [Tumblr](http://ant3012.tumblr.com/)
+- [Google doc](https://docs.google.com/spreadsheet/ccc?key=0AkH7zcNiVdpudFZmN3YwaHhveTRVZUEybTBjc1VMUFE&usp=sharing#gid=0)
+- ADs (supplementary class and so on) + feedback
+
+## Next Class
+- More practices
+- 3 Point Lighting
+- More on Texturing
+- Rendering
+
+## Mid-term project
+- A rendering picture (Full HD: 1024 * 768) of still life with your sign and title.   
+	Option: your sketch + research/references
+
+</div>
+<div id="wrapper">
+	
+	<div class="header">
+		
+		<h1>ANT3012</h1>		
+		<a href="index.html">Overview</a><br/><br/>
+
+		<a href="mayafundt.html">Maya Fundamental</a><br/>
+		<a href="mayaNURBs.html">Maya NURBs</a><br/>
+		<a href="mayaPoly01.html">Maya Polygon I</a><br/>
+		<a href="mayaShade.html">Maya Shading</a><br/>
+
+	</div>
+	<div class="section">
+		<script type="text/javascript">
+		//var converter = new Markdown.Converter();
+		var converter = new Showdown.converter();
+		document.write(converter.makeHtml($('#sourcetext').text()));
+		</script>
+	</div>
+	
+	<div class="footer">HyunKyung (Haru) Ji, 2013</div>
+	
+</div>
+</body>
+</html>
