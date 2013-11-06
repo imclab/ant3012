@@ -198,6 +198,96 @@ Oct. 29 - Nov. 2, 2013 @ Jayu Theatre, Seoul Arts Center, Korea
 ## Next Class
 - 3 Point Lighting [3-point lighting](http://www.3drender.com/light/3point.html)
 
+20131106.
+# 1- , 2- , and 3- points lighting
+
+## Goal
+- Understand 3-point lighting
+- Creating 1-, 2-, and 3- point lighting
+
+### 3- points lighting components
+
+**Key light**
+
+The most intense light in a scene. The key light's source is generally identifiable (the sun, a lamp, and so on). The key light usually produces the strongest shadow in the scene.
+
+
+**Fill light**
+
+A secondary light that is less intense than the key. This light "fills" in the dark areas of a subject and the shadows produced by the key. Fill lights often represent light from a key that has bounced off a surface, such as a wall.
+
+
+**Rim/Back/Hair light**
+
+An intense light source placed behind a subject that strikes the subject along the edge. Rim lights are commonly known as backlights or hair lights.
+
+## Using 3- points lighting
+#### 1-Point Lighting
+The 1-point lighting scheme is dramatic, sometimes stark, and often foreboding. The lighting involves a single, easily identifiable key light source, with no significant supplemental sources. 
+#### 2-Point Lighting	
+The 2-point lighting scheme matches many of the lighting scenarios we encounter in our everyday lives. The scheme often involves a strong key and an extremely diffuse fill.
+#### 3-Point Lighting
+The most commonly discussed and applied lighting technique is 3-point lighting. 
+In the standard 3-point lighting scheme, a strong key is placed to one side of a subject (approximately 15 to 45 degrees off the camera axis). A fill light is placed on the opposite side and is at least half the intensity of the key. A rim light is placed behind the subject so that it grazes the subject's edge.
+#### 4-point Lighting
+Four-point lighting simply adds a fourth light to illuminate the background or set behind the subject.
+
+![3pl00](img/maya/shading/lighting/threepointex.png)
+
+[Standard 3-point lighting applied to a mannequin, Image from Advanced Maya® Texturing and Lighting]
+
+## Reference
+Book: Advanced Maya® Texturing and Lighting, Second Edition.
+
+![3pl01](img/maya/shading/lighting/threepoint.jpg) Image from Toth Edina's Blog.
+
+### More reference
+- [Rembrandt](http://en.wikipedia.org/wiki/Rembrandt)
+- [Caravaggio](http://en.wikipedia.org/wiki/Caravaggio)
+- [Audrey Tautou in both Amelie and A Very Long Engagement](http://dknicholas.blogspot.kr/2010/11/process-close-up-lighting-and.html)
+- [flickriver:3pointlighting](http://www.flickriver.com/photos/tags/3pointlighting/interesting/)
+
+### Practice
+- Scene preparation: tip - using Grid snap + Modify/Center Pivot & Modify/Freeze Transformations
+	1. a pedestal (a box or a cilinder)
+	2. a suface back-wall (Create Curve & Loft)
+	3. Import character bust or torso obj file (you can download from our class note or /GettingStarted2014LessonData/) 
+	4. Align them to create a good studio environment
+	
+	Example studio
+	
+	![3pl02](img/maya/shading/lighting/studio.png)
+	
+>- Obj file
+
+>	1. Open 'Toad_hi_res.mb' file from GettingStarted2014LessonData (GettingStarted2014LessonData/UVmapping) 
+>	2. **Export** (File / Export Selection..) [.obj file](http://en.wikipedia.org/wiki/Wavefront_OBJ) (first, you need load objExport.bundle from Window / Settings/Preferences / Plug-In Manager)
+>	3. Save the obj file in the Data folder in your working Maya project
+		
+- Set-up the camera & render setting
+- Applying Key light: once you make any light, the default Maya light will be turned off. recommend using Spot light (tip: position the Key light using Look Through Selected Camera from a view panel menu. In the Attribute Editor, change Cone Angle and Penumbra values, and select Depth Map Shadows (Resolution: 512, Filter Size: 4). Render a test)
+- Applying Fill light: recommend using Ambient light
+- Applying Back light: recommend using Directional light
+- Experimentation: experiment to create your style and to fit to your goal/intention.
+
+	![3pl03](img/maya/shading/lighting/ex.png)
+	
+	Image from Maya ® Professional Tips and Techniques
+
+## Review
+Some suggestion for the form to submit:
+	- Submit one folder, shows your school id_name, which has all related sub files.
+	- Documentation file as pdf.
+	- Send your final .mb file.
+
+## AD/Next Class
+- No class on Friday (school holiday) 
+- Finishing three point lighting set-up and beginning organic Polygon modeling (realistic face)
+
+## Homework
+- Submit **your Cornell Box with glass and mirror materials plus your lighting set-up** to Tumblr by next class. Please write your school id and name.
+- You can prepare your sketch (front, side) for your character modeling
+
 </div>
 <div id="wrapper">
 	
@@ -209,7 +299,9 @@ Oct. 29 - Nov. 2, 2013 @ Jayu Theatre, Seoul Arts Center, Korea
 		<a href="mayafundt.html">Maya Fundamental</a><br/>
 		<a href="mayaNURBs.html">Maya NURBs</a><br/>
 		<a href="mayaPoly01.html">Maya Polygon I</a><br/>
-		<a href="mayaShade.html">Maya Shading</a><br/>
+		<a href="mayaShade.html">Maya Shading</a><br/><br/>
+		<a href="toad.obj">Toad high resolution obj file</a><br/>
+		<a href="toad_low.obj">Toad low resolution obj file</a><br/>
 
 	</div>
 	<div class="section">
