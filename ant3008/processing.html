@@ -1,0 +1,1930 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>Digital Media Art Workshop</title>
+    
+<link href="css/site.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="css/highlight.default.css" media="screen" rel="stylesheet" type="text/css" />
+  
+<script src="js/jquery.js"></script>
+<script src="js/showdown.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="css/github.css">
+<script src="js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link rel="icon" type="image/x-icon" href="favicon.ico" />
+</head>
+<body>
+<!--
+Write the markdown code below.
+A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
+-->
+
+<div style="display: none" id="sourcetext">
+
+# Processing
+
+&lt;img src="img/P.jpg" align="right" &gt;
+
+> Processing is an open source programming language and integrated development environment (IDE) built for the electronic arts and visual design communities with the purpose of teaching the fundamentals of computer programming in a visual context, and to serve as the foundation for electronic sketchbooks. One of the stated aims of Processing is to act as a tool to get non-programmers started with programming, through the instant gratification of visual feedback. [wikipedia](http://en.wikipedia.org/wiki/Processing_(programming_language))
+
+Processing focuses on creating "images, animations, and interactions" within an integrated textual programming environment. Although it was designed as a sketching and pedagogical tool, today "there are tens of thousands of students, artists, designers, researchers, and hobbyists who use Processing for learning, prototyping, and production." [Processing](http://www.processing.org/)
+
+It is one of the most widely used platforms for digital visual arts and creative coding projects today. It is multi-OS and can run in a web browser, it has been extended with many great libraries, integrates well with [Arduino](http://www.arduino.cc/) for hardware sensors, and has been [ported to JavaScript](http://processingjs.org/) for better integration in today's browsers.
+
+### Getting Processsing
+
+Processing is the open software and supports cross-platform. Please download and install from [http://processing.org/](http://processing.org/).
+
+If you have any problems installing it, you can always try [running it in the browser](http://sketch.processing.org/) -- not everything will work, but enough to get started.
+
+### Support materials and references
+
+Two recommended textbooks:
+
+- *Getting Started with Processing*  
+Casey Reas and Ben Fry. Published June 2010, O'Reilly Media. 208 pages. Paperback.
+- *Learning Processing: A Beginner's Guide to Programming Images, Animation, and Interaction*  
+Daniel Shiffman. Published August 2008, Morgan Kaufmann. 450 pages. Paperback.
+
+In addition there are numerous help, tutorial, example and reference files in the Processing software, on the [Processing website](http://www.processing.org) and [elsewhere](http://www.google.com). There are huge amounts of example code and projects available on [OpenProcessing](http://openprocessing.org/) for example.
+
+----
+
+# Getting Started
+
+Take a look at the first [Processing tutorial](http://www.processing.org/learning/gettingstarted/) -- this is also linked from the Processing Help menu. 
+
+Here's our first program. In processing, programs are also known as *sketches*:
+
+```
+void setup() {
+  size(400, 400);
+}
+
+void draw() {
+  line(100, 250, 300, 250);
+}
+```
+
+- **Don't copy & paste code**: type it by hand! Doing things by hand requires full attention to detail and develops vital subconscious skills; these will help you enormously when you start inventing your own projects.
+
+- **Watch out for punctuation**: especially the three different kinds of brackets ```() {} []``` and the semicolon ```;``` at the end of each line!
+
+- Be careful to **indent the code properly**. Indent any lines between a block start curly bracket ```{``` and a block end curly bracket ```}```. You can use *Tools->Auto Format* (or command-T keys) to do this automatically. Although the code may work, indenting is really helpful to understand the code, and is a good habit to get into.
+
+We can run this program, or sketch, by clicking on the triangle run button in Processing, or pressing Command-R; it should open a window looking something like this:
+
+![first sketch](img/first_sketch.png) 
+
+If you make a mistake in writing the code, the program will probably fail to run (or if you get lucky, it might run and do something unexpected...). A message will display in the *console* area, which might help you find the error.
+
+## What does it mean? 
+
+Maybe you can guess what this does? 
+
+### What is *setup* and *draw*?
+
+We can see there are two parts to our program; the first part goes ```void setup()...``` and the second part goes ```void draw()...```. These parts of the program are called **functions**, because they describe what the program can do ("how it functions"). The function called ```draw``` makes sense; Processing is primarily an environment for making programs that draw graphics. The function called ```setup``` does whatever work is needed in order to set up the system to start drawing; in this case it defines the size of the canvas. 
+
+The ```setup``` and ```draw``` function names have special meaning in Processing; they will be automatically *called* by the Processing environment at special times:
+
+- when a program (sketch) starts, Processing calls the ```setup``` function once.
+- after that, Processing calls the ```draw``` function several times a second, so that we can make moving images just like animators do.
+
+So whatever we put inside ```setup``` will happen once when the sketch starts, and whatever we put in ```draw``` will happen whenever Processing updates the canvas. 
+
+> Technical detail: A function collects a series of **instructions** together in a sequence, rather like a recipe. So the ```draw``` function is a recipe for making images. 
+
+Let's add some more instructions, more code, into ```draw```:
+
+```
+void setup() {
+  size(400, 400);
+}
+
+void draw() {
+  line(100, 250, 300, 250);
+  line(200, 200, 200, 220);
+}
+```
+
+So what do ```size``` and ```line``` do? They are **built-in** functions, which are predefined by Processing. There are lots and lots of built-in functions, for all kinds of purposes. They are the basic ingredients for a recipe, and they are all listed online in the [Processing Language API](http://www.processing.org/reference/). 
+
+Let's look there to see what ```size``` means. We can either search for it manually in the list, or we can select and right-click on the word ```size``` and choose **Find in Reference**. 
+
+There's a lot of information there, because although we start simple, Processing can get quite powerful; but usually the most important parts are *Description*, *Syntax* and *Parameters*. The syntax tells us the correct ways(s) to write the function, and the parameters explain how to make the function behave in different ways. 
+
+Here are the important parts:
+
+> **Description:** Defines the dimension of the display window in units of pixels...   
+> **Syntax:** ```size(w, h)```  
+> **Parameters:** ```w``` int: width of the display window in units of pixels  
+> **Parameters:** ```h``` int: height of the display window in units of pixels
+
+OK, so for our code, ```size(400, 400);```, the ```400``` corresponds to ```w``` and ```400``` corresponds to ```h``` in the syntax.  So, our ```size(400, 400);``` means:
+
+> Define the dimension of the display with a height of 400 pixels and 400 pixels.
+
+## But, what's a pixel?
+
+You can think of it that all graphics rendering in Processing are drawn on good old graph paper. The screen is a grid of *picture elements*, or **pixels** for short, like the boxes in graph paper. Each pixel can have one color. All images you see on the computer are made of pixels. To draw a line, you can *fill in* a row of pixels:
+
+![Coordinate system](img/coordinates.jpg)
+
+> To tell the computer which box to start drawing from, or to finish drawing, you need to identify the box by it's position on the canvas. We use **X** for the horizontal position along the page (the column), and **Y** for the vertical position down the page (the row). Every box has a unique X,Y pair to identify it; this is called the coordinate. Almost all drawing in Processing is defined in terms of **pixel positions (coordinates)** and **pixel sizes (dimensions)**.
+
+There's a great tutorial about this [here](http://www.processing.org/learning/drawing/). 
+
+OK, so now we know that when our program starts, it runs our ```setup``` function, which contains the ```size(400, 400)``` instruction, which creates a canvas that has 400 rows and 400 columns of pixels. 
+
+We can probably make a good guess as to what the ```line``` calls mean too! 
+
+If we check the reference, it says the ```line(...)``` function "draws a line to the screen", and the parameters set the 'x' (horizontal) and 'y' (vertical) coordinates of the start position, followed by the 'x' (horizontal) and 'y' (vertical) coordinates of the end position, of the line. So our first line goes from position 200, 200 to psotion 200, 220. Our second line goes from position 100, 250 to position 300, 250. 
+
+Try changing some of these numbers and running the sketch to see what it does. Drawing like this is part of the reason why the ancestor of Processing was called *Design by Numbers*. 
+
+OK, now we understand what the code is doing, we should add our understanding to our document, by adding *comments*. Any line can be a comment by adding two slashes at the start:
+
+```
+// what to do the when the program first starts up:
+void setup() {
+  // create a canvas of 400 wide by 400 high pixels:
+  size(400, 400);
+}
+
+// what to do when the canvas should be drawn:
+void draw() {
+  // draw a line from 100, 250 to 300, 250:
+  line(100, 250, 300, 250);
+  // draw a line from 200, 200 to 200, 220:
+  line(200, 200, 200, 220);
+}
+```
+
+Your code will still work even if you don't indent it propery or add comments, but you will have a far more difficult time understanding what it does when you look at it again a week or two later, or if you show it to somebody else (e.g. the professors...) Many wise programmers say: **"code is more often read than written"**. 
+
+## Algorithmic painter
+
+What else can we draw besides lines? Take a look at the reference to understand the ```rect``` and ```ellipse``` functions. Let's try adding an ellipse:
+
+```
+// what to do the when the program first starts up:
+void setup() {
+  // create a canvas of 400 wide by 400 high pixels:
+  size(400, 400);
+}
+
+// what to do when the canvas should be drawn:
+void draw() {
+  // draw a line from 100, 250 to 300, 250:
+  line(100, 250, 300, 250);
+  // draw a line from 200, 200 to 200, 220:
+  line(200, 200, 200, 220);
+  // draw an ellipse centered at 200, 200
+  // with width 300 and height 300:
+  ellipse(200, 200, 300, 300);
+}
+```
+
+Wait -- what happened to our lines?
+
+The problem is that when we draw the ellipse, it *draws over the top* of our lines. Processing draws with the *Painter's algorithm*, which means that each new thing drawn goes over the top of the one before, like oil painting on a canvas. It happened to use because the ```ellipse``` call happens *after* the ```line``` calls in our ```draw``` function (remember, the content of a function is like a recipe; each line happens after the line above it). OK, so we can fix this by changing the order:
+
+
+```
+// what to do the when the program first starts up:
+void setup() {
+  // create a canvas of 400 wide by 400 high pixels:
+  size(400, 400);
+}
+
+// what to do when the canvas should be drawn:
+void draw() {
+  // first, draw an ellipse centered at 200, 200
+  // with width 300 and height 300:
+  ellipse(200, 200, 300, 300);
+  
+  // now draw some lines:
+  // draw a line from 100, 250 to 300, 250:
+  line(100, 250, 300, 250);
+  // draw a line from 200, 200 to 200, 220:
+  line(200, 200, 200, 220);
+}
+```
+
+Okay. Can you make a face?
+
+You can add ```smooth();``` to the ```setup``` function, to make the image look nicer, and ```strokeWeight(3);``` in ```setup``` to change the line thickness (weight, as in how hard your pen is pressed...). 
+
+Try using ```fill(0);``` and ```fill(255);``` to paint in black or white, in different places within the ```draw``` function.
+
+> The ```fill``` function "sets the color used to fill shapes". The matching syntax it uses here is ```fill(gray)```, where gray in this case is 255, which is a "number specifying value between white and black". In Processing, ```0``` is black, ```255``` is white, and numbers in between are different shades of gray. 
+
+So ```fill(255);``` sets the color used to fill shapes to be white. That means, any objects drawn after this call will have white filling.
+
+Remember, if anything doesn't work, try changing the order, or *commenting it out* by putting ```//``` in front of it.
+
+----
+
+## First Interaction 
+
+Let's bring this to life. Try this:
+
+```
+// what to do the when the program first starts up:
+void setup() {
+  // create a canvas of 400 wide by 400 high pixels:
+  size(400, 400);
+  // make the lines look smooth:
+  smooth();
+  // make the lines look fat:
+  strokeWeight(3);
+}
+
+// what to do when the canvas should be drawn:
+void draw() {
+  // paint in white:
+  fill(255);
+  // first draw the head:
+  // an ellipse centered at 200, 200
+  // with width 300 and height 300:
+  ellipse(200, 200, 300, 300);
+  
+  // now draw some features:
+  // paint in black:
+  fill(0);
+  
+  // mouth
+  // draw a rect from 100, 250 
+  // with width 200 and height 20:
+  rect(100, 250, 200, 20);
+  
+  // nose
+  // draw a line from 200, 200 to 200, 220:
+  line(200, 200, 200, 220);
+  
+  // eyes
+  // more ellipses for the eyes:
+  ellipse(130, 150, 80, 80);
+  ellipse(270, 150, 80, mouseY);
+}
+```
+
+At the end, the height of the last two ellipses are set to whatever the value of ```mouseY``` is. Again, we can look it up in the reference: "The system *variable* ```mouseY``` always contains the current horizontal coordinate of the mouse".
+
+### What is a *system variable*?
+
+> A variable is a container for data that can change while a program runs. Even though the data changes, the name of the variable stays the same, and that's how we can use it. The value of the variable ```mouseY``` gets changed automatically by Processing (because it is a *system* variable); the value stored in ```mouseY``` is automatically set to the value of the current mouse vertical position. 
+
+There's ```mouseX``` of course -- see if you can find a good place to use it!
+
+Since the values of ```mouseX``` and ```mouseY``` are always numbers, we can also use them wherever we could use numbers. This means we can do a bit of mathematics with them. For example, we can add and subtract, multiply or divide them. We can use this to make the eyes less sensitive:
+
+```
+// what to do the when the program first starts up:
+void setup() {
+  // create a canvas of 400 wide by 400 high pixels:
+  size(400, 400);
+  // make the lines look smooth:
+  smooth();
+  // make the lines look fat:
+  strokeWeight(3);
+}
+
+// what to do when the canvas should be drawn:
+void draw() {
+  // paint in white:
+  fill(255);
+  // first draw the head:
+  // an ellipse centered at 200, 200
+  // with width 300 and height 300:
+  ellipse(200, 200, 300, 300);
+  
+  // now draw some features:
+  // paint in black:
+  fill(0);
+  
+  // mouth
+  // draw a rect from 100, 250 
+  // with width 200 and height 20:
+  rect(100, 250, 200, mouseX / 10);
+  
+  // nose
+  // draw a line from 200, 200 to 200, 220:
+  line(200, 200, 200, 220);
+  
+  // eyes
+  // more ellipses for the eyes:
+  ellipse(130, 150, 80, mouseY / 5);
+  ellipse(270, 150, 80, mouseY / 5);
+}
+```
+
+# Assignment 1
+
+Make your own character, using the basic shapes. Look in the Processing reference to find out how to use them all:
+
+- ```line```
+- ```rect```
+- ```ellipse```
+- ```point```
+- ```triangle```
+- ```quad```
+- ```arc```
+
+The character should respond to the mouse in an interesting way.
+
+Comment each line to explain what you think it does. In the description when you submit the work, explain your motivation, and any questions you have or any aspect you want to get feedback about.
+
+----
+
+# Week 2
+
+## Making variables
+
+We used the word *variable* already to describe ```mouseX```, and we said:
+
+> A variable is a container for data that can change while a program runs. Even though the data changes, the name of the variable stays the same, and that's how we can use it. 
+
+There are other variables built-in to Processing (called *system variables*) like this:
+
+- ```width``` is the width of the canvas in pixels
+- ```height``` is the height of the canvas in pixels
+
+### Width and height
+
+Using ```width``` and ```height``` is a really good idea. Let's say we want to make a sketch with a line through the middle:
+
+```
+void setup() {
+	size(400, 200);
+}
+
+void draw() {
+	// clear the canvas to light grey:
+   	background(200);
+   	
+	// draw a horizontal line through the canvas:
+	line(0, 100, 400, 100);
+}
+```
+
+Works great. But what if we now want to make the window bigger?
+
+```
+void setup() {
+	size(600, 300);
+}
+
+void draw() {
+	// clear the canvas to light grey:
+   	background(200);
+   	
+	// draw a horizontal line through the canvas:
+	line(0, 100, 400, 100);
+}
+```
+
+No good -- now we also need to change the ```line``` parameters, and any other drawing parameters we might have had in a more complex sketch. But if we change those numbers to be *relative* to the size of the canvas, this problem disappears:
+
+```
+void setup() {
+	size(600, 300);
+}
+
+void draw() {
+	// clear the canvas to light grey:
+   	background(200);
+   	
+	// draw a horizontal line through the canvas:
+	line(0, height/2, width, height/2);
+}
+```
+
+Perfect!
+
+### Make your own variables
+
+So a variable is like a box to store a value, which has a name. We can use this name to see what value the variable contains, like we did with ```mouseX``` and ```width```. But we can also create variables ourselves, and put different values into them as the program runs.
+
+Before we can use a variable, we need to *declare* it. In Processing, like many programming languages, a variable also has a *type*. You can think of it as what kind of box it is. A variable of a particular type can only hold values of that same type. Some of the basic types are ```int``` (whole numbers), ```float``` (decimal numbers), ```color```, etc. You can't put a color into a float-type variable, you need to put it into a color-type variable. So when we declare a variable, we give it a *name* and a *type*:
+
+```
+// declare a new variable called 'i', whose type is 'int' (a whole number)
+int i;
+
+// set the value of the variable:
+i = 1;
+```
+
+This can be combined into a single instruction like this:
+
+``` 
+// declare a new variable 'i' of type 'int' and initialize it to the value one:
+int i = 1;
+```
+
+And here's how we use it:
+
+```
+// read the value of the variable:
+print(i);	// -> 1
+
+// change the value of the variable:
+x = 10;
+
+// read the value of the variable:
+print(i);	// -> 10
+
+// assign a decimal number to x:
+x = 0.5; 	// -> error: "cannot convert from float to int"
+```
+
+The error happens because in Processing, and many other languages, although the *value* of a variable can change, the type cannot.
+
+
+### Growth
+
+How does a worm grow? It keeps adding new segments on the end. It starts with one segment, then adds another to get two, and another, and another, as time goes on. Let's make a worm.
+
+```
+// declare a variable for the number of worm segments:
+int wormsize;
+
+// let's start by seeing what a worm with ten segments looks like:
+void setup() {
+	size(600, 300);
+	// set an initial value for the wormsize:
+	wormsize = 10;
+}
+
+// and draw it:
+void draw() {
+	// clear the canvas to light grey:
+   	background(200);
+   	
+	// draw a horizontal line through the canvas:
+	line(0, height/2, wormsize, height/2);
+}
+```
+
+Okay, so let's see it grow. When it starts, the ```wormsize``` should be 1, since it only has one segment. As time passes, we need to change the ```wormsize``` variable by adding one more segment. That means that the new ```wormsize``` will be the old ```wormsize``` plus one. We write that in Processing like this:
+
+```
+// growth: the new wormsize will be the old wormsize plus one:
+wormsize = wormsize + 1;
+```
+
+Pretty weird looking, especially if you've ever done any algebra before! What you have to remember is that in Processing (and many other programming languages), the single ```=``` symbol does not mean *equals*, it means *assignment*. The variable on the left-hand side (LHS) is changed to the value of the right-hand side (RHS). Processing first calculates the value on the RHS, and copies that into the variable on the LHS. So the RHS represents the past, and the LHS represents the future. That's why we can use the same variable name on both sides.
+
+Okay, so since this needs to happen "as time passes", we need to put it into the ```draw``` function, which is the only function that happens continually.
+
+```
+// declare a variable for the number of worm segments:
+int wormsize;
+
+// let's start by seeing what a worm with ten segments looks like:
+void setup() {
+	size(600, 300);
+	// set an initial value for the wormsize:
+	wormsize = 10;
+}
+
+// and draw it:
+void draw() {
+	// clear the canvas to light grey:
+	background(200);
+   	
+	// growth: the new wormsize will be the old wormsize plus one:
+	wormsize = wormsize + 1;
+
+	// draw a horizontal line through the canvas:
+	line(0, height/2, wormsize, height/2);
+}
+```
+
+Notice how the wormsize variable keeps its value between each call to ```draw```. Variables give us a way to make our program *remember* things we care about, things we compute now and want to use later, things that *persist through time*. We call it **state**, because a variable captures one aspect of a program that could be in one condition or another (but not both at the same time), and remains that way until changed. 
+
+After a while, the worm persists in growing so long that it doesn't fit on the screen anymore, and our sketch becomes rather boring.
+
+Some options:
+
+- Restart the worm when the mouse is clicked
+- Restart the worm if it gets to the edge
+
+### Restart the worm when the mouse is clicked
+
+Let's break this down into the components:
+
+1. "Restart the worm..."
+2. "...when the mouse is clicked"
+
+#### 1. "Restart the worm..."
+
+To restart the worm we must put all of the changeable conditions back to their original configuration; that mean putting the variables back to the initial values. In this case we only have one variable, ```wormsize```, and the initial value was one, so to restart the worm we need to add this code:
+
+```
+// reset the worm conditions to initial configuration:
+wormsize = 1;
+```
+
+But where should we add it?
+
+#### 2. "...when the mouse is clicked"
+
+To respond to a mouse click, we should use another special function that is automatically called by Processing, just like ```setup``` and ```draw```. If you create a function called ```mouseClicked```, Processing will call it whenever the mouse button is clicked. Let's add this to our program:
+
+```
+void mouseClicked() {
+	print("mouse was clicked!");
+}
+```
+
+Now clicking on the sketch will make this message appear in the console. When the mouse is clicked, Processing enters our ```mouseClicked``` function and performs whatever instructions it contains. So we need to put instructions in here to reset our worm to the initial size again:
+
+```
+void mouseClicked() {
+	// when the mouse is clicked, the worm will restart from birth again:
+	wormsize = 0;
+}
+```
+
+### Restart the worm if it gets to the edge
+
+Again, we can break this into the two parts "Restart the worm" and "when it gets to the end". We know how to restart the worm, but how do we detect that it has reached the end? There's no built-in function of Processing to help us here. Instead, we are going to have to keep checking the state of the worm as it grows, until the possible *condition* of "it gets to the end" becomes true. If this condition becomes true, then we should restart the worm. 
+
+In Processing we can express this idea by using a special construction called ```if```. Each ```if``` structure has a **condition**, and a block of **instructions** that it will perform only when the condition is true:
+
+```
+// print 'success' in the console if the value of the variable 'guess' equals 7:
+if (guess == 7) {
+	print("success");
+}
+```
+
+Whatever we put into the condition section should result in either a ```true``` or ```false``` value. If it results in ```true```, then the instructions inside will be performed. We can also add an ```else``` section, to provide instructions for what to do if the condition is ```false```:
+
+```
+// print 'success' in the console if the value of the variable 'guess' equals 7:
+if (guess == 7) {
+	print("success");
+} else {
+	print("bad guess, try again");
+}
+```
+
+Back to the problem of the worm: we have to keep checking the state of the worm, and **if** it reaches the end, **then** reset it to the initial state, **else** increase the worm size by one. We have to check the condition continually, so we put it inside ```draw```:
+
+```
+void draw() {
+  // clear the canvas to light grey:
+  background(200);
+
+  if (wormsize > width) {
+    // worm reached the end, reset to initial value:
+    wormsize = 1;
+  } 
+  else {
+    // growth: the new wormsize will be the old wormsize plus one:
+    wormsize = wormsize + 1;
+  }
+
+  // draw a horizontal line through the canvas:
+  line(0, height/2, wormsize, height/2);
+}
+```
+
+# Week 3: Abstraction with transformations and functions
+
+Last week we learned that we can use ```width``` and ```height``` to easily support different canvas resolutions for our growing worm. But what if we want to draw the face from week 1? 
+
+```java
+void setup() {
+  // create a canvas of 400 wide by 400 high pixels:
+  size(400, 400);
+  
+  // drawing style:
+  smooth();
+  strokeWeight(3);
+}
+
+void draw() {
+  // paint in white:
+  fill(255);
+  // head:
+  ellipse(200, 200, 300, 300);		
+  
+  // paint in black:
+  fill(0);
+  // mouth
+  rect(100, 250, 200, 20);
+  // nose
+  line(200, 200, 200, 220);
+  // eyes
+  ellipse(130, 150, 80, 80);
+  ellipse(270, 150, 80, 80);
+}
+```
+
+Each one of these drawing commands needs to be modified into expressions of ```width``` and ```height```, which is a bit silly. And what if we wanted the face to move around the canvas, maybe like the worm, or maybe following the mouse? The code would get really complicated:
+
+```java
+void draw() {
+	// paint in white:
+	fill(255);
+	// head:
+	ellipse(width/2, height/2, 300, 300);		
+	
+	// paint in black:
+	fill(0);
+	// mouth
+	rect(width/2 - 100, height/2 + 50, 200, 20);
+	// nose
+	line(width/2, height/2, width/2, height/2 + 20);
+	// eyes
+	ellipse(width/2 - 70, height/2 - 50, 80, 80);
+	ellipse(width/2 + 70, height/2 - 50, 80, 80);
+}
+```
+
+Or to follow the mouse, as a 'face painter':
+
+```java
+void draw() {
+	// paint in white:
+	fill(255);
+	// head:
+	ellipse(mouseX, mouseY, 300, 300);		
+	
+	// paint in black:
+	fill(0);
+	// mouth
+	rect(mouseX - 100, mouseY + 50, 200, 20);
+	// nose
+	line(mouseX, mouseY, mouseX, mouseY + 20);
+	// eyes
+	ellipse(mouseX - 70, mouseY - 50, 80, 80);
+	ellipse(mouseX + 70, mouseY - 50, 80, 80);
+}
+```
+
+### Translations of space
+
+Processing offers a much simpler way of doing this:
+
+```java
+void draw() {
+	// move to the center of canvas:
+	translate(width/2, height/2);
+	
+	// paint in white:
+	fill(255);
+	// head:
+	ellipse(0, 0, 300, 300);		
+	
+	// paint in black:
+	fill(0);
+	// mouth
+	rect(-100, 50, 200, 20);
+	// nose
+	line(0, 0, 0, 20);
+	// eyes
+	ellipse(-70, -50, 80, 80);
+	ellipse( 70, -50, 80, 80);
+}
+```
+
+You could think of ```translate``` as meaning changing the 'start point' (in mathematical terms, the *"origin"*) of drawing. Or you could think of it as moving the underlying "graph paper" that we are drawing onto, like in the Processing.org [Transform2D tutorial](http://processing.org/learning/transform2d/). 
+
+> The word *translate* is also taken from mathematics; it *translates* points in one space (such as Processing drawing commands) to points in another space (such as the pixels on screen). 
+
+Notice that ```width``` and ```height``` are only used once. The more drawing we do, the more useful this is. If we are drawing a complex object using lots of drawing commands, all the positions will be *relative* to the center of the object, rather than  to the top-left corner of the screen. And now it's really easy to change -- for example, we could try using ```translate(mouseX, mouseY)``` instead. 
+
+Or maybe re-use something from our worm:
+
+```java
+int wormsize;
+
+void setup() {
+	size(800, 600);
+	wormsize = 1;
+}
+
+void draw() {
+	// reset or grow worm:
+	if (wormsize > width) {
+		// worm reached the end, reset to initial value:
+		background();
+		wormsize = 1;
+	} 
+	else {
+		// growth: the new wormsize will be the old wormsize plus one:
+		wormsize = wormsize + 1;
+	}
+
+	// move to the worm position:
+	translate(wormsize, height/2);
+	
+	// paint in white:
+	fill(255);
+	// head:
+	ellipse(0, 0, 300, 300);		
+	
+	// paint in black:
+	fill(0);
+	// mouth
+	rect(-100, 50, 200, 20);
+	// nose
+	line(0, 0, 0, 20);
+	// eyes
+	ellipse(-70, -50, 80, 80);
+	ellipse( 70, -50, 80, 80);
+}
+```
+
+### Transformers of transformers
+
+The ```translate``` command isn't the only way to change the coordinate system (the underlying graph paper...). We can also change the size of the coordinate system (graph paper) with the ```scale``` command, and rotate with the ```rotate``` command. 
+
+The ```scale``` command scales all positions and lengths that come after it, and the ```rotate``` command rotates all positions that come after it around the current origin. It's easier to understand this by making it.
+
+Try putting ```scale(0.25);``` after the ```translate``` command in the face-worm sketch above; notice how the face got 25% smaller.
+
+Rotations are a little trickier; like most programming languages, Processing measures angles in **radians** rather than **degrees**. This makes a lot of math much easier, but isn't so intuitive if you've never used radians before. 
+
+> ![Radians](img/UnitCircle.png)
+>
+> There are 360 degrees in a circle. There are 2*Pi radians in a circle. So 180 degrees == Pi radians, 90 degrees == Pi/2 radians, etc. What is Pi? Pi is the ratio of the diameter of a circle (the distance between opposite edges) and the circumference (the distance around the border). It is a strange but incredibly important number whose value is roughly 3.141592653589793... 
+
+You can always convert a number in degrees to a number in radians using the ```radians``` function, like this:
+
+```java
+	// pick a random angle between -45 degrees and +45 degrees
+	// convert this into radians
+	// and use it to rotate all future drawing commands:
+	rotate( radians( random(-45, 45) ) );
+```
+
+Here's an example of combining transformations together with some of the user-variable concepts from the worm, but making it remember X and Y position and direction, rather than length; and allowing it to wander like a robot dragging a rubber stamp:
+
+```
+// robot has a X and Y position, and direction angle:
+float robotx;
+float roboty;
+float robota;
+
+void setup() {
+  size(300, 600); 
+  
+  // initialize robot variables
+  robotx = width/2;
+  roboty = height/2;
+  robota = 0;
+}
+
+void draw() {
+  // move the robot
+  robotx = robotx + random(-3, 3);
+  roboty = roboty + random(-3, 4);
+  robota = robota + radians(random(-12, 12));
+  
+  // what to do if robot leaves bottom edge:
+  if (roboty > height) {
+     roboty = 0;
+  }
+  
+  // transform Processing into a robot-centric space:
+  translate(robotx, roboty);
+  rotate(robota);
+  scale(random(1, 1.2));
+  
+  // draw robot:
+  rect(-10, -10, 20, 20, 4);
+  point(-4, -2);
+  point(4, -2);
+  line(-4, 4, 4, 4);
+}
+
+void mouseClicked() {
+	// restart robot at mouse position
+	robotx = mouseX;
+	roboty = mouseY;
+}
+```
+
+### Functions
+
+To draw many different faces or robots at different sizes, positions and rotations, we could copy & paste the draw commands, but that seems like going back to the problem of when you change one, you have to change them all... We can **abstract** a series of commands into a re-usable sequence by creating our own **functions**:
+
+```java
+void drawFace() {
+	// paint in white:
+	fill(255);
+	// head:
+	ellipse(0, 0, 300, 300);		
+	
+	// paint in black:
+	fill(0);
+	// mouth
+	rect(-100, 50, 200, 20);
+	// nose
+	line(0, 0, 0, 20);
+	// eyes
+	ellipse(-70, -50, 80, 80);
+	ellipse( 70, -50, 80, 80);
+}
+```
+
+And now we can use this function to draw many faces:
+
+```java
+void draw() {
+	// start drawing at middle of screen
+	translate(width/2, height/2);
+	// scale down to 10%:
+	scale(0.1);
+	
+	// draw a face:
+	drawFace();
+	
+	// move to the right & draw another face:
+	translate(100, 0);
+	drawFace();
+	
+	// move to the right & draw another face:
+	translate(100, 0);
+	drawFace();
+	
+	// move to the right & draw another face:
+	translate(100, 0);
+	drawFace();
+	
+	// move to the right & draw another face:
+	translate(100, 0);
+	drawFace();
+}
+```
+
+Notice how the transforms accumulate. (Try replacing the 100's with mouseX, or seconds(), or random(), or a variable of your own, like wormsize...)
+
+### The matrix of transformations
+
+Obviously there's some hidden state at work here.
+
+> We met hidden state already with the ```fill``` and ```stroke``` functions. When we set ```fill(100)```, everything we draw will be filled with dark grey until the next ```fill``` call changes the *fill color*. Processing carries this *fill color*, and several other hidden state parameters, around with it as it runs our sketches. Processing has a lot of these hidden state parameters, and we have to keep that in mind when trying to understand what our sketches are doing. In a way, changing hidden state changes how Processing works into a different program: calling ```fill(255)``` turns Processing into a white-filling program for a while. Calling ```translate(width/2, height/2)``` turns Processing into a program that draws relative to the center of the canvas. 
+
+*However*, ```translate```, ```scale``` and ```rotate``` do not replace the previous values; instead they accumulate on top of each other into a hidden state called the **transformation matrix**, which is a fancy name for how we get from the coordinate system in which we are currently drawing to the coordinate system of the actual output pixels.
+
+Try putting ```scale(0.25);``` before or after the ```translate``` command in the face-worm sketch. Notice that if the ```scale``` comes first, it also scales the ```translate```! Or try adding ```translate(random(-3, 3), random(-3, 3))``` after or before the other ```translate```, and see what that does. We're about ready for some generative design...
+
+On the other hand, what if we didn't want to accumulate? We could manually do the opposite transform (e.g. translate-left followed by translate-right), but wouldn't it be easier if we could tell Processing to just "forget" the last few transformations?
+
+### Push and pop
+
+How can we 'undo' a transformation and get back to the original system? In Processing we can do this using the ```pushMatrix()``` and ```popMatrix()``` commands. Each *push* remembers the *transformation matrix* when it is called, and at the next *pop* this *transformation matrix* is restored.
+
+With this we can easily now create ideal visual forms, and then create instances of these forms with different position, scale and rotation, however we please. We'll come back to this idea next week.
+
+We can also use ```pushMatrix()``` and ```popMatrix()``` to create hierarchical structures. For example:
+
+```java
+void setup() {
+	size(600, 400); 
+	noStroke();
+}
+
+void draw() {
+	// draw brush from perspective of mouse:
+	translate(mouseX, mouseY); 
+	
+	fill(255, 100);
+	
+	// draw individual blobs of paint:
+	if (mousePressed) {
+		splitter();
+		splitter();
+		splitter();
+	}
+}
+
+void splitter() {
+	pushMatrix();
+	translate(random(-5, 5), random(-5, 5));
+	ellipse(0, 0, 10, 10);
+	splatter();
+	splatter();
+	splatter();
+	popMatrix();
+}
+
+void splatter() {
+	pushMatrix();
+	translate(random(-5, 5), random(-5, 5));
+	ellipse(0, 0, 4, 4);
+	popMatrix();
+}
+```
+
+> Also see the L-System and Robot Arms in the Processing Examples
+
+## Assignment 3: build an ANTustrator. 
+
+Cf. Maeda: DBN, reactive drawing; and Haberli's [Dynadraw](http://processing.org/exhibition/works/dynadraw/))
+
+This will be a non-standard drawing program, with some dynamic aspect. 
+
+For example:
+
+- Chooses different brushes from time to time
+- Brushes change shape, or color, etc.
+- Brushes sometimes wander about by themselves
+- Brushes orbit the mouse in some way
+- Brushes have child brushes and grandchild brushes that orbit their parents
+- Etc.
+- You could make changes of behavior when the mouse is clicked or keys are pressed. 
+
+Here's a tip: if you want the background to slowly fade out, add this at the start of your draw():
+
+```java
+void draw() {
+	// set fill color to be partly transparent:
+	fill(200, 100);
+	// draw a rect over everything:
+	rect(0, 0, width, height);
+	// set the fill color to be opaque again:
+	fill(100);
+	
+	// draw stuff here:
+	// 
+	//
+}
+```
+
+## Data by drawing
+
+This week we'll take our drawing program further. Remember how the drawings in the *YellowTail* project got up and started moving around by themselves? 
+
+We already know how to make a drawing program, but we have a big problem: if drawings will move, this means that they are being redrawn every frame; in our sketch programs we can't do that, because as soon as we call ```background()``` all our previous drawing is lost! 
+
+What we'll need to do is introduce another level of abstraction: we'll store our drawing actions into another kind of memory (we'll use *arrays*), and use that storage to redraw them on every frame. But before we learn about arrays, we need to understand loops.
+
+### Looping
+
+Last time we saw how to use functions to repeat actions (such as our ```splitter()``` and ```splatter()``` actions. But just repeating calls like this is a bit silly:
+
+```java
+println("hello");
+println("hello");
+println("hello");
+println("hello");
+println("hello");
+println("hello");
+```
+
+As usual, there's a way to avoid this kind of repetition. The *syntax* (the way it is written) is strange-looking, but it fits in everything that is needed:
+
+```java
+for (int i = 0; i < 6; i++) {
+	println("hello");
+}
+```
+
+It's a bit like the ```if``` construction; it defines a new block of instructions (inside the ```{``` and ```}``` markers) to perform repeatedly. The ```for``` keyword indicates that this will happen **for** a number of times. Between the ```for``` and the ```{``` sets up how many times to run the loop, and it also gives us an additional variable ```i``` to tell us which time through the loop we are running (the *loop counter*): 
+
+- ```int i = 0;``` sets up the variable ```i``` to be the loop counter, and starts the counter at zero.
+- ```i < 6;``` tells Processing that the for loop is done when ```i``` is not less than 6. 
+- ```i++``` tells Processing to increase the value if ```i``` by 1 after each loop. 
+
+```java
+for (int i = 0; i < 6; i++) {
+	println(i);
+}
+```
+
+This prints out the numbers 0, 1, 2, 3, 4, 5 and then stops. The first time through the loop body, ```i``` is at the initial value of 0. After running the loop body ```i``` is increased by one (because of the ```i++```) and then the condition is checked; since ```i``` is still less than 6 (```i < 6```), the loop body runs again. After a few more runs, ```i``` ends up reaching a value of 6, this condition fails, and the ```for``` loop is done.
+
+Now the great thing is that if we wanted to call the function 100 times, we just need to change the code in one place!
+
+---
+
+Here's an example of using a *for loop* to draw some lines:
+
+```java
+void setup() {
+  size(256, 256);
+}
+
+void draw() {
+  background(200);
+  // draw lots of lines:
+  for (int i = 0; i < 256; i++) {  
+    // change color by loop index:
+    stroke(i);
+    line(i, 0, i, i);
+  }
+}
+```
+
+Try some variations of that:
+
+- Try using ```line(i, 0, i, random(256))``` instead. Now you can see the individual lines. 
+- Try using ```i < mouseX``` instead of ```i < 256```, to see how the loop limit changes.
+- Instead of ```i++```, try ```i = i + 5```. Then each time through the loop, the value of ```i``` increases by 5, instead of increasing by 1, and the lines get spread out.
+
+Or something more complex:
+
+```java
+void setup() {
+  size(256, 256);
+}
+
+// create a variable to count the frames drawn:
+int frame = 0;
+
+void draw() {
+  // a new frame increases the current frame count:
+  frame = frame + 1;
+
+  background(200);
+  // draw lots of lines:
+  for (int i = 0; i < 256; i += 1) {  
+    // change color by loop index:
+    stroke(i);
+    // calculate an angle that is dependent on time (frame) and loop index (i):
+    float angle = PI * 0.1 * (frame + i);
+    line(i, i, 255 * cos(angle), 255 * sin(angle));
+  }
+}
+```
+
+### Storing data into arrays
+
+For loops are great if we want to perform actions a large number of times, but don't help much when we want to store a large amount of state. Let's look at *variables* again.
+
+If I want to randomize and store the x and y position of a point; I can do this:
+
+```java
+float x;
+float y;
+
+void setup() {
+  x = random(width);
+  y = random(height);
+}
+
+void draw() {
+  ellipse(x, y, 5, 5);
+}
+```
+
+Now if I want to draw four points, I could do this:
+
+```java
+float x1;
+float x2;
+float x3;
+float x4;
+float y1;
+float y2;
+float y3;
+float y4;
+
+void setup() {
+  x1 = random(width);
+  x2 = random(width);
+  x3 = random(width);
+  x4 = random(width);
+  y1 = random(height);
+  y2 = random(height);
+  y3 = random(height);
+  y4 = random(height);
+}
+
+void draw() {
+  background(200);
+  ellipse(x1, y1, 5, 5);
+  ellipse(x2, y2, 5, 5);
+  ellipse(x3, y3, 5, 5);
+  ellipse(x4, y4, 5, 5);
+}
+```
+
+It works, but what a nightmare -- imagine if we wanted to draw 100 points! Arrays were invented to solve just this kind of problem. With an array, we can represent a large number of variables with just one name:
+
+```
+float[] x;
+float[] y;
+```
+
+The ```float[]``` part indicates that x and y are arrays which contain float-type data. *Note that all items in an array have the same type*. So there are arrays-of-ints, arrays-of-floats, etc.
+
+The array also needs to be initialized, to tell it how many elements it contains:
+
+```
+void setup() {
+	x = new float[100];
+}
+```
+
+The ```new``` keyword allocates memory in Processing for the array, and the ```[100]``` tells it that there must be enough space for 100 items. *Note that the ```float``` type must match the declaration type of x.* These can be combined into a single instruction:
+
+```
+float[] x = new float[100];
+```
+
+To read a value from the array, we need to specify what index we are interested in:
+
+```
+// print the value of x at index 10:
+println(x[10]);
+```
+
+It's a bit like the pages of a book. Instead of referring to each page by a different name, you can just use the page number; so to get page ten you write ```pages[10]```.  
+
+**Note that, like many things in computer science, arrays index from 0, not from 1. So the first item in x is x[0], the second item is x[1], etc.  If the array length is 100, then the last item is at x[99].**
+
+To store a value into the array, we need to also say which element (at which *index*) to store:
+
+```
+// set the value of x at index 10 to be 123:
+x[10] = 123;
+```
+
+Knowing this, we can rewrite our example above to use arrays:
+
+```java
+float x[] = new float[4];
+float y[] = new float[4];
+
+void setup() {
+  // initialize each point:
+  x[0] = random(width);
+  x[1] = random(width);
+  x[2] = random(width);
+  x[3] = random(width);
+  y[0] = random(height);
+  y[1] = random(height);
+  y[2] = random(height);
+  y[3] = random(height);
+}
+
+void draw() {
+  background(200);
+  // draw each point:
+  ellipse(x[0], y[0], 5, 5);
+  ellipse(x[1], y[1], 5, 5);
+  ellipse(x[2], y[2], 5, 5);
+  ellipse(x[3], y[3], 5, 5);
+}
+```
+
+And we can combine this with for loops to make it even simpler:
+
+```java
+float x[] = new float[4];
+float y[] = new float[4];
+
+void setup() {
+  for (int i = 0; i < 4; i++) {
+    // initialize this point
+    x[i] = random(width);
+    y[i] = random(height);
+  }
+}
+
+void draw() {
+  background(200);
+  for (int i = 0; i < 4; i++) {
+    // draw this point
+    ellipse(x[i], y[i], 5, 5);
+  }
+}
+```
+
+We could also turn the number of elements into a variable, so that it is only ever defined once:
+
+```java
+int elements = 4;
+float x[] = new float[elements];
+float y[] = new float[elements];
+
+void setup() {
+  for (int i = 0; i < elements; i++) {
+    // initialize this point
+    x[i] = random(width);
+    y[i] = random(height);
+  }
+}
+
+void draw() {
+  background(200);
+  for (int i = 0; i < elements; i++) {
+    // draw this point
+    ellipse(x[i], y[i], 5, 5);
+  }
+}
+```
+
+Now it is truly trivial to convert this into a program that draws 10, 100 or 1000 points!
+
+And also, since our points are now persistent, we can have them wander around a little on their own:
+
+```java
+int elements = 40;
+float x[] = new float[elements];
+float y[] = new float[elements];
+
+void setup() {
+  for (int i = 0; i < elements; i++) {
+  	// initialize this point:
+    x[i] = random(width);
+    y[i] = random(height);
+  }
+}
+
+void draw() {
+  background(200);
+  for (int i = 0; i < elements; i++) {
+  	// move this point:
+  	x[i] += random(-1, 1);
+  	y[i] += random(-1, 1);
+  	
+  	// draw it:
+    ellipse(x[i], y[i], 5, 5);
+  }
+}
+```
+
+It wouldn't be difficult to combine this with ```translate()``` and more complex drawing functions...
+
+```java
+
+int elements = 40;
+float x[] = new float[elements];
+float y[] = new float[elements];
+
+void setup() {
+  size(400, 400);
+  for (int i = 0; i < elements; i++) {
+    // initialize this point:
+    x[i] = random(width);
+    y[i] = random(height);
+  }
+}
+
+void drawFace() {
+  // paint in white:
+  fill(255);
+  // head:
+  ellipse(0, 0, 300, 300);        
+
+  // paint in black:
+  fill(0);
+  // mouth
+  rect(-100, 50, 200, mouseY / 8);
+  // nose
+  line(0, 0, 0, 20);
+  // eyes
+  ellipse(-70, -50, 80, 80);
+  ellipse( 70, -50, 80, 80);
+}
+
+void draw() {
+  background(200);
+  for (int i = 0; i < elements; i++) {
+    // move this point:
+    x[i] += random(-1, 1);
+    y[i] += random(-1, 1);
+
+    // draw it:
+    //ellipse(x[i], y[i], 5, 5);
+    pushMatrix();
+    translate(x[i], y[i]);
+    scale(0.1);
+    drawFace();
+    popMatrix();
+  }
+}
+```
+
+### Drawing
+
+To get back to our drawing program, we know now that whenever the mouse is being dragged, we need to add a new point to our array. That means the number of points added to the array changes over time, which means we need another variable to store it:
+
+```java
+// the number of drawn points added to the array
+// (initially zero, until drawing begins):
+int numpoints = 0;
+```
+
+Whenever the mouse is dragged, we need to add a point, and increase numpoints accordingly:
+
+```java
+void mouseDragged() {
+	// add a point to the array:
+	x[numpoints] = mouseX;
+	y[numpoints] = mouseY;
+	// increase the number of points added:
+	numpoints += 1;
+}
+```
+
+Our drawing routine needs to respect this number of points added:
+
+```java
+void draw() {
+	background(200);
+	for (int i = 0; i < numpoints; i++) {
+		ellipse(x[i], y[i], 5, 5);
+	}
+}
+```
+
+So the first drawing program looks like this:
+
+```java
+int elements = 1000;
+float x[] = new float[elements];
+float y[] = new float[elements];
+
+// the number of drawn points added to the array
+// (initially zero, until drawing begins):
+int numpoints = 0;
+
+void mouseDragged() {
+  // add a point to the array:
+  x[numpoints] = mouseX;
+  y[numpoints] = mouseY;
+  // increase the number of points added:
+  numpoints += 1;
+}
+
+void draw() {
+  background(200);
+  for (int i = 0; i < numpoints; i++) {
+    ellipse(x[i], y[i], 5, 5);
+  }
+}
+```
+
+If we want to clear the drawing for each gesture, we can reset the ```numpoints``` to zero:
+
+```java
+void mousePressed() {
+	numpoints = 0;
+}
+```
+
+For fun, we could try adding our random wander:
+
+```java
+	// move this point:
+  	x[i] += random(-1, 1);
+  	y[i] += random(-1, 1);
+```
+
+Or any other method to change the points over time. For example, change the size of the point according to the current frame and the point index:
+
+```java
+// the current frame count:
+int frame = 0;
+
+void draw() {
+  background(200);
+  for (int i = 0; i < numpoints; i++) {
+    // calculate the size of the point:
+    int size = (frame + i) % 10;
+    ellipse(x[i], y[i], size, size);
+  }
+  // increase the current frame:
+  frame += 1;
+}
+```
+
+----
+
+What if we want to join up the points into lines? 
+
+We know that each point just needs to connect to the point before it, so we could use:
+
+```java
+	// draw line from previous point to current point:
+	line(x[i-1], y[i-1], x[i], y[i]);
+```
+
+But this will throw an error: On the first loop ```i``` is equal to zero, so in attempting to use ```x[i-1]``` we mean ```x[-1]```, an element index which does not exist. The easiest way to fix this is to change the loop start point from ```i = 0``` to ```i = 1```:
+
+```java
+void draw() {
+  background(200);
+  for (int i = 1; i < numpoints; i++) {
+    // draw line from previous point to current point:
+    line(x[i-1], y[i-1], x[i], y[i]);
+  }
+  // increase the current frame:
+  frame += 1;
+}
+```
+
+We could even move these points in a circle according to different frequencies along the line; and have colors pulse down the path:
+
+```java
+void draw() {
+  background(200);
+  for (int i = 1; i < numpoints; i++) {
+    float phase = frame / i;
+    // move this point:
+    x[i] += sin(phase);
+    y[i] += cos(phase);
+    // use this to set the color:
+    stroke((frame + i) % 256);
+    // draw line from previous point to current point:
+    line(x[i-1], y[i-1], x[i], y[i]);
+  }
+  // increase the current frame:
+  frame += 1;
+}
+```
+
+Depending on how drastic the animation, we might not want the line to move until we finish drawing (this is how YellowTail worked too). 
+
+We can turn this into the statement: "Don't modify the line while the mouse button is pressed". 
+Which is equivalent to "Only modify the line if the mouse button is not pressed".
+
+We know the mouse button is pressed if ```mousePressed``` is true. Since we want the opposite case, we need to prefix this with the *logical not* operator, which is Processing is written ```!```:
+
+```java
+	if (!mousePrsesed) {
+		// update the line here	
+	}
+```
+
+Of course, there's no reason why we shouldn't use a more complex shape than just a line... Can you figure out how to use ```translate()```, ```rotate()``` and ```scale()``` with ```x[i-1]```, ```y[i-1]```, ```x[i]``` and ```y[i]``` to draw with complex combinations of drawing commands?
+
+----
+
+# Assignment: ANTustrator II
+
+Extend your drawing program (or create a new one) in which each gesture comes alive and moves around, changes shape, etc. 
+
+- You could draw with blobs, or faces, or lines, or more complex shapes... 
+- Your objects might move around with random motions, or geometric or rhythmical patterns
+
+----
+
+### YellowTail
+
+To actually implement YellowTail is more complex. Below is some code that implements it, but don't worry if this is too difficult to understand. We can just look at it quickly if there is time.
+
+Here are some of the things we haven't implemented yet:
+
+- The line draws itself onto its own tail
+- It does this one step at a time, gradually moving through the list of points
+
+To draw onto the tail, we need to change what data is being stored. Instead of storing the location of the mouse, we can instead store the difference in location from the previous point. Let's try changing our code to do that first. 
+
+Luckily, Processing has another couple of system variables that make our life easier: ```pmouseX``` and ```pmouseY``` store the previous positions of the mouse, so we can use these to calculate the mouse change.
+
+Here's an example of how that might look:
+
+```java
+// arrays to store the X and Y line segments:
+int elements = 1000;
+float x[] = new float[elements];
+float y[] = new float[elements];
+// the number of drawn points added to the array so far:
+int numpoints = 0;
+// whether or not to animate the line:
+boolean animate = false;
+// the position of the head:
+float headx = 0;
+float heady = 0;
+// the index of the head within the array:
+int head = 0;
+
+// the position of the pen used in drawing:
+float penx = 0;
+float peny = 0;
+
+void setup() {
+  size(600, 600);
+}
+
+void mousePressed() {
+  // reset the line:
+  numpoints = 0;
+  head = 0;
+  // this is where to start from:
+  headx = mouseX;
+  heady = mouseY;
+  // don't move the line while drawing:
+  animate = false;
+}
+
+void mouseReleased() {
+  animate = true;
+}
+
+void mouseDragged() {
+  // record into the array the current mouse *change*:
+  x[numpoints] = mouseX - pmouseX;
+  y[numpoints] = mouseY - pmouseY;
+  // increase the number of points added:
+  numpoints += 1;
+}
+
+void draw() {
+  background(200);
+  fill(0);
+
+  // animate the head: 
+  if (animate && numpoints > 1) {
+    // update the new start position according to the head
+    headx += x[head];
+    heady += y[head];
+
+    // make sure it wraps at the canvas boundaries
+    if (headx > width) {
+      headx -= width;
+    } 
+    else if (headx < 0) { 
+      headx += width;
+    } 
+    else if (heady > height) { 
+      heady -= height;
+    } 
+    else if (heady < 0) { 
+      heady += height;
+    }
+
+    // update the head:
+    head = head + 1;
+    if (head >= numpoints) { 
+      head = 0;
+    }
+  }
+
+  // load the current head position into the "pen"
+  penx = headx;
+  peny = heady;
+
+  // start drawing from the head to the end of the array
+  drawsegments(head, numpoints);
+
+  // now draw the rest of the array from the start to the head
+  drawsegments(0, head);
+
+  // draw the head:
+  ellipse(penx, peny, 5, 5);
+}
+
+void drawsegments(int from, int to) {
+  for (int i = from; i < to; i++) {
+    // draw line from previous point to current point:
+    line(penx, peny, penx + x[i], peny + y[i]);
+    penx += x[i];
+    peny += y[i];
+  }
+}
+```
+
+----
+
+# OOPs
+
+We've met a few useful ways to **abstract** parts of our program, which makes it easier for us to rapidly extend or change the program. We saw *variables* for persistent state, and got used to using *functions* to re-use commands. We got used to arrays:
+
+```java
+float x[] = new float[elements];
+```
+
+And doing things with ```x[i]``` and ```y[i]``` to repeat processes with different state. Is there a way to combine some of these capabilities?
+
+## Objects
+
+Instead of having a list of x's and list of y's (and lists of r's, g's, b's, size's, rotation's, etc. etc.) we can have a list of objects, where each object has an x, y (r, g, b, etc.). 
+
+We can go further; not only can we group properties into an object (we'll call them **members**), we can also have functions (we'll call them **methods**). All objects of the same type (we'll call it a **class**) have the same kinds of member, and the same methods.
+
+For example, in our drawing program we could define a class of object and use it to represent an individual face, or a platter of paint. It might look something like this:
+
+```java
+
+// define a new type of object (class) with the name "Face":
+class Face {
+	
+	// properties of the object go here
+	float x;
+	float y;
+	// r, g, b, etc.
+	
+	// any actions when the face is created go here
+	// (i.e. what was in setup() before)
+	Face() {
+		// setup code here
+	}
+	
+	// any actions when the face was drawn go here
+	// (i.e. what was in draw() before)
+	void draw() {
+		pushMatrix();
+		// notice how we can use the member variables x and y directly here:
+		translate(x, y);
+		// drawing code here
+		popMatrix();
+	}	
+}
+```
+
+Creating an object uses the ```new``` operator (which we met before with arrays), but in a slightly different way:
+
+```java
+// declare a variable of type Face
+Face myface;
+
+void setup() {
+	// allocate and initialize the variable:
+	myface = new Face();
+}
+
+void draw() {
+	// call the draw method for myface:
+	myface.draw();
+}
+```
+
+Of course our objects can contain properties of any type, including floats, ints, colors etc., but also arrays, and other classes of object. And they can contain other methods which we can use to change properties, like animating the face. 
+
+And, of course, we can create more than one object from a class (that's half of the whole point...)
+
+Here's a full example:
+
+```java
+class Face {
+  // properties of the object go here
+  float x;
+  float y;
+  float eyesize;
+  // any actions when the face is created go here
+  // (i.e. what was in setup() before)
+  Face() {
+    // setup code here
+    x = random(width);
+    y = random(height);
+    eyesize = 2 + random(8);
+  }
+  // any actions when the face was drawn go here
+  // (i.e. what was in draw() before)
+  void draw() {
+    pushMatrix();
+    // notice how we can use the member variables x and y directly here:
+    translate(x, y);
+    // drawing code here
+    // paint in white:
+    fill(255);
+    // head:
+    ellipse(0, 0, 30, 30);        
+    // paint in black:
+    fill(0);
+    // mouth
+    rect(-10, 5, 20, 2);
+    // nose
+    line(0, 0, 0, 2);
+    // eyes
+    ellipse(-7, -5, eyesize, eyesize);
+    ellipse( 7, -5, eyesize, eyesize);
+    // drawing done:
+    popMatrix();
+  }
+
+  // a method to update the state of the object
+  void update() {
+    x += random(-1, 1);
+    y += random(-1, 1);
+  }
+}
+
+// declare variables of type Face
+Face myface1;
+Face myface2;
+
+void setup() {
+  // allocate and initialize the variable:
+  myface1 = new Face();
+  myface2 = new Face();
+}
+
+void draw() {
+  // update the objects:
+  myface1.update();
+  myface2.update();
+
+  // clear the scene:
+  background(200);
+
+  // draw the objects:
+  myface1.draw();
+  myface2.draw();
+}
+```
+
+Of course, we can also make arrays of objects. As usual, all elements in an array must have the same type, which means an array of objects must all have the same class:
+
+```java
+// an array of Faces:
+Face[] myfaces;
+
+// how many blobs we will make:
+int numfaces = 100;
+
+void setup() {
+	size(400, 400);
+	
+	// allocate the array:
+	myfaces = new Face[numfaces];
+	
+	// now allocate & initialize each member of the array:
+	for (int i=0; i < numfaces; i++) {
+		myfaces[i] = new Face();
+	}
+}	
+
+void draw() {
+	// draw each member of the array:
+	for (int i=0; i < numfaces; i++) {
+		myfaces[i].draw();
+	}
+}
+```
+
+Knowing that, we could make a class to hold arrays of paint splaters, and call it a Stroke. We could then also create an array of Strokes, to support multiple drawing gestures at the same time, so that we can have a more complex drawing program...
+
+----
+
+# Pong
+
+Our last excursion with Processing will be to create a game. We're going to rebuild one of the oldest and most famous computer games of all time: **PONG!**
+
+![Pong the arcade game](http://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Atari_Pong_arcade_game_cabinet.jpg/250px-Atari_Pong_arcade_game_cabinet.jpg)
+
+> Pong is one of the earliest arcade video games; it is a an electronic ping-pong game featuring simple two-dimensional graphics. Pong was one of the first video games to reach mainstream popularity. The game was originally manufactured by Atari Incorporated (Atari), who released it in 1972. Pong quickly became a success and is the first commercially successful video game, which led to the start of the video game industry. Pong has been referenced and parodied in multiple television shows and video games, and has been a part of several video game and cultural exhibitions. [wikipedia](http://en.wikipedia.org/wiki/Pong)
+
+## The Game
+
+> The player controls an in-game paddle by moving it vertically across the left side of the screen, and can compete against either a computer controlled opponent or another player controlling a second paddle on the opposing side. Players use the paddles to hit a ball back and forth. The aim is for a player to earn more points than the opponent; points are earned when one fails to return the ball to the other. [wikipedia](http://en.wikipedia.org/wiki/Pong)
+
+[Here is a video example.](http://www.youtube.com/watch?v=pDrRnJOCKZc)
+
+![Screenshot](http://upload.wikimedia.org/wikipedia/commons/f/f8/Pong.png)
+
+To rebuild Pong in Processing we should analyze the important components and subcomponents, to make sure we can implement each one, until the entire game is complete.
+
+*(More advanced features are left in italics, to note that we can add them later...)*
+
+## Rendering
+
+- **Background**: just plain black.
+- **Net**: here we can just use a ```line```.
+	- *If we want to create a dashed line as in the original Pong, we would need to create a series of small lines. We could use a ```for``` loop to do this.*
+- **Paddles**: just a regular ```rect```.    
+	- We might want to use ```rectMode(CENTER)``` to position the paddles.   
+	- The horizontal position of paddles never changes, but the vertical position does, so we should use a variable. 
+	- We might also want to store the paddle width and height in variables. 
+- **Ball**: same rendering style as paddles.   
+	- The ball has both X and Y movement, which will need variables.
+- **Scores**: we can draw text in Processing using the ```text``` function.    
+	- Obviously the scores can also change, so we'll need variables for each player's score. They can be integers.  
+	- If we want anything other than the default font, we'll need to use ```createFont``` and ```textFont``` functions. *Alternatively we could try and reconstruct boxy characters like the original Pong game.* 
+
+## Interaction
+
+- **Paddles**: players can move the paddles up and down the screen.    
+	- For a two-player game, we'll need to use keypresses to move the paddles.
+		- We can use the ```keyPressed()``` event to detect when a key is pressed, and modify a paddle velocity according to what key it is.
+		- *We could use ```keyReleased()``` to set the paddle velocity back to zero.*
+	- *We'd also need to invent one or more algorithms for the computer's playing style... Perhaps we can use a random walker that is more likely to move toward the ball Y position than away from it?*
+	- Paddles should also be restricted from reaching the top or bottom of the screen.
+		- *In the real Pong game, they couldn't even quite reach the edge, so there was always a chance to score against a pro.*
+- **Options**: we might want to use other keypresses to choose options:
+	- A key to reset the game & scores to zero
+	- *A key to pause the game*
+	- *Whether to play 2-player mode or 1-player versus computer*
+
+## Dynamics
+
+Most of the game dynamics come from the movement of the ball. These are the basic properties of Pong:
+
+- The ball is always moving. It can move horizontally or vertically. 
+	- That means we will also need variables to store the ball horizontal and vertical speed, and a process to use them to continually update the position.
+	
+```java
+	// calculate a new position for the ball:
+	float new_x = position_x + speed_x;
+	float new_y = position_y + speed_y;
+	
+	// update the position:
+	position_x = new_x;
+	position_y = new_y;
+```
+	
+- At the start of a round, the ball begins in the center of the screen with a random direction of motion.
+- If the ball touches the top or bottom edge of the screen:
+	- It bounces (reversing the vertical direction)
+- If the ball reaches the left edge of the screen:
+	- Player 2 gains one point
+	- A new round is started
+- If the ball reaches the right edge of the screen:
+	- Player 1 gains one point
+	- A new round is started
+- If the ball collides with the inside face of a paddle:
+	- It reverses horizontal direction
+	- *It speeds up slightly, to make the game get harder.*
+	- *It changes vertical direction slightly, depending on which edge (top or bottom) of the paddle it collided with.*
+
+The trickiest part of that is detecting whether the paddle has hit the ball. We can break that down into two conditions:
+
+- The Y position is between the top and bottom edges of the paddle.
+- The old X position was in front of the inside face of the paddle, and the new X position is on or behind the inside face of the paddle.
+
+*Strictly speaking this is not quite accurate. For a real collision detection we would need to use a sphere-rectangle intersection function. But the approximation works well enough.*
+
+Once we havea pong working, we can start playing around with new rules, different interactions, graphics, etc... and of course cool sounds...
+
+[Taking pong way too far...](http://www.youtube.com/watch?v=NDjseVmruH8)
+
+----
+
+# Assignment 5: SoClock
+
+
+Create a novel design for a clock. The clock should show the hours, minutes and seconds in an interesting new way. You can use elements from one of the previous assignments (visual or code). 
+
+Your clock must at least show the hour and minute and seconds, but you can also use milliseconds, day, month, year if you like. Remember the built-in Processing functions for telling the time include ```hour(), minute(), second(), millis(), day(), month(), year()```.
+
+Be sure to include a debug mode for the clock: while the mouse is pressed down, use the mouseX and mouseY to override the hour and minutes, so that you can verify how it looks without having to wait all day!
+
+----
+
+# Submitting your work
+
+You can submit your projects to our [classroom page on OpenProcessing](http://www.openprocessing.org/classroom/2619). You'll first need to register with a username; please use your school ID and name for your username, e.g.:
+
+```
+123456_grahamw
+```
+
+To submit a sketch to your OpenProcessing portfolio:
+
+- Go to [OpenProcessing.org](http://www.openprocessing.org/) and sign in.
+- Go to the *my portfolio* page and click on *create new sketch*
+- Copy your Processing code from the Processing editor and paste it into the webpage, and click *save*
+- Add a title for your work, and a description if you like.
+- Again click *save*
+
+To submit one of your portfolio works to the classroom assignment sub-collection:
+
+- Go to [the classroom collection](http://www.openprocessing.org/classroom/2619)
+- Click on the *Select a sketch* button
+- Click on the sketch you want to submit
+- Now move this sketch into the proper assignment sub-collection.
+
+Make sure your code is commented with your original idea. Avoid repeating the same code as much as possible.
+
+Assignments are due every Wednesday at 3pm. 
+
+
+</div>
+<!--
+We can create other variables in our programs too, and read and change the data they contain. To do this, we need to learn another detail first. In Processing, and many other programming languages, variables also have a **type**, which never changes. The type of a variable defines what *kinds* of data it can contain. For example, **int** type variables always contain integers, which are whole numbers like 0, 1, 2, 3 etc. They cannot contain any other kind of data. So whenever we introduce a new variable name to the program (we *declare* it), we also need to tell Processing what type of data it will contain.
+-->
+<div id="wrapper">
+	
+	<div class="header">
+		
+		<h1>ANT3010</h1>		
+		<a href="index.html">Overview</a><br/>
+		<a href="dmaworkshop.pdf">Syllabus</a><br/>
+		<a href="finalproject.html">Final Project</a><br/>
+		<br/>
+		<a href="processing.html">Processing</a><br/>
+		<br/>
+		<a href="max.html">Max/MSP/Jitter</a><br/>
+		<br/>
+		<a href="maxprocessing.html">Processing to Max</a><br/>
+	</div>
+	<div class="section">
+		<script type="text/javascript">
+		//var converter = new Markdown.Converter();
+		var converter = new Showdown.converter();
+		document.write(converter.makeHtml($('#sourcetext').text()));
+		</script>
+	</div>
+	
+	<div class="footer">Haru Ji & Graham Wakefield, 2013</div>
+	
+</div>
+</body>
+</html>

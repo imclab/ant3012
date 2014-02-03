@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>Digital Media Art Workshop</title>
+    
+<link href="css/site.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="css/highlight.default.css" media="screen" rel="stylesheet" type="text/css" />
+  
+<script src="js/jquery.js"></script>
+<script src="js/showdown.js" type="text/javascript"></script>
+
+<link rel="icon" type="image/x-icon" href="favicon.ico" />
+</head>
+<body>
+<!--
+Write the markdown code below.
+A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
+-->
+
+<div style="display: none" id="sourcetext">
+
+# Max/MSP/Jitter
+
+> Max is a visual programming language for music and multimedia developed and maintained by San Francisco-based software company Cycling '74. During its 20-year history, it has been widely used by composers, performers, software designers, researchers, and artists for creating innovative recordings, performances, and installations. [wikipedia](http://en.wikipedia.org/wiki/Max_(software))
+
+&lt;img src="img/jitter_screenshot_example.png" align="right" &gt;
+
+It is a "software for innovation and exploration" whose goal is to allow you to "connect anything", to "explore sounds, images and interfaces in new combinations", through a "fluid, visual and immediate process" in which you can "see and hear the results with every change you make." [cycling74](http://cycling74.com/products/max/)
+
+It is one of the most widely used platforms for digital arts and computer music research today. It supports OSX and Windows currently, integrates sound, graphics (2D and 3D) at high and low levels, and integrates with a remarkable range of other tools, devices and systems, especially through the large number of [user-authored extensions](http://www.maxobjects.com/).
+
+Max programs are called 'patches', in reference to the inspiration from analog modular audio synthesizers, in which processing modules (oscillators, filters, etc.) are connected together by wires. In Max, programs are written in a visual style by connecting objects (processing modules) together with patch-cords (wires). This is called visual data-flow programming. Objects perform operations on data received at their inputs and send the results along the wires connected to their outputs. 
+
+----
+
+### Getting Max
+
+Max/MSP is commercial software and supports Mac OSX and Windows. You can [download a demo version](http://www.cycling74.com) for a month's use or you can [purchase a student-priced  version](http://cycling74.com/shop/individual-academic/) if you don’t have other access to the software. The TA will have USB dongles with Max/MSP/Jitter licenses available for use during class and lab times.
+
+### Support materials and references
+
+The materials included within the Max/MSP/Jitter application (help & reference, examples and other documentation) and the [Max website](http://cycling74.com/category/articles/tutorials/) are probably the best resources available. 
+
+[All the Max documentation is also available online here.](http://cycling74.com/docs/max6/dynamic/c74_docs.html#docintro)
+
+----
+
+# Projects using Max
+
+Several projects selected by the students:
+
+Audio synthesis:
+
+- [Wobble bass](http://www.youtube.com/watch?v=E_qrk2hE__s)
+- [Formant (human vowel) synthesis](http://www.youtube.com/watch?v=GRAiDa7KHz8)
+- [Generating creature sounds for games/movies](http://designingsound.org/2013/04/using-maxmsp-to-build-a-fictional-dialogue-system/)
+
+Music performance:
+
+- [Tacit group performing Tetris](http://www.youtube.com/watch?v=S6B0kYbaAoo&list=PL4C8BFB6867AAF691)
+- [Extending the Gayageum](http://www.youtube.com/watch?v=MjKLebkndC0&feature=youtu.be)
+
+Lighting and projection:
+
+- [Controlling lighting interactively using DMX](http://cycling74.com/2012/09/11/working-with-hardware-dmx-part-2/)
+- [Projection mapping](http://www.youtube.com/watch?v=7a8W_Kw_yjo)
+- [More projection mapping](http://www.taezoo.com/xe/?document_srl=381&category=10679)
+
+Image to sound:
+
+- [Drawing music](http://www.youtube.com/watch?v=UbqiggmMAJA)
+- [Tracking color to control a synthesizer](http://www.youtube.com/watch?v=fLttrKJs5Wo)
+
+Physical / device sensing:
+
+- [Touch screen sound installation with visualization](https://www.youtube.com/watch?v=nGprrV2ym3c&feature=youtube_gdata_player)
+- [Virtual bubbles installation](http://www.youtube.com/watch?v=Vd5Z7vMGDgE&feature=player_detailpage)
+- [Angry Birds physical controller](http://cycling74.com/project/super-angry-birds-a-diy-tangible-controller/)
+- [Invisible violin (wiimote and other device)](http://www.youtube.com/watch?v=TyqATpi_knw)
+- [Turn anything into a percussion instrument](http://cycling74.com/project/vw-amarok-pikap-interactive-percussion-playing-pickup/)
+- [Noisy Jelly (capacitative sensing)](http://vimeo.com/38796545)
+
+Simulation:
+
+- [Artificial Life simulation](http://vimeo.com/40679958)
+
+## Inspirations to make with Max
+
+- [Learning how to walk](http://www.youtube.com/watch?v=iNL5-0_T1D0&feature=youtu.be)
+- [Learning how to swing](http://www.youtube.com/watch?v=w1MF0Iz0p40&feature=youtu.be)
+
+----
+
+# Start Patching
+
+You've been writing text for years, but how often have you patched? That means we need to build-up motor-muscle-memory; we need to spend as much time patching as possible. 
+
+Patching has two modes (switch using the padlock icon or *Command-E*):
+
+- **Edit** mode, for creating objects, moving objects around, changing their size, connecting them up, etc.
+- **Interaction** mode, in which editing isn't possible, but install buttons and number boxes and sliders etc. can be manipulated in real-time. 
+- (Actually there's a third *presentation* mode, which hides the objects away, for making performance interfaces, but we can ignore that for now).
+
+## Objects and patch-cords
+
+There are two kinds of object:
+
+- **UI object**: buttons, sliders, video windows, oscilloscopes, etc., i.e. anything that has interaction input or visual output.
+- **Generic box object:** everything else. The generic box object performs a specific function according to the first word written in it. So [metro] functions like a metronome, [print] functions to print text in the console, [trigger] will fire several messages, [delay] will delay a message for some time.
+
+Objects have **inlets** and **outlets**, which can be connected by **patch-cords**. Inlets & outlets can have many patchcoords connected to them, or none at all. 
+
+Creating objects and connecting them up is pretty much all there is to writing programs in Max.
+
+## Messages
+
+Different kinds of data (*messages*) can flow down the patchcoords, like numbers and strings and video frames etc. The simplest kind of message data is called ```bang```, and it just means "do something now". 
+
+When an object receives messages in the inlets, it does something, and possibly outputs new messages to the outlets. So, for example, when a [button] receives a ```bang``` message, it flashes, and outputs another ```bang``` message to the outlets.
+
+The easiest way to see what is going down a patch coord is to hook a [print] object up to it, and see what shows up in the Max console window. Or, another way is to hook up to the *right* inlet of a [messagebox].
+	
+> You can also use [print foo], [print myname] etc. to distinguish between different print outputs. 
+
+## Hot and cold inlets
+
+Not every inlet causes action right away. Some inlets are "cold"; they just store the message received, which will get used when something arrives at the other "hot" inlet. 
+
+Find out which are hot or cold by putting the mouse over the inlet -- it will either show up blue (cold) or red (hot). 
+
+## Order of operation
+
+If an object has several outlets, they output in a right-to-left order (mostly). To think like Max, you have to follow all of the connections from an object until they end, or reach a cold inlet, then move to the next outlet to trace. 
+
+If an outlet is connected to two or more other objects, the order in which the messages fire are determined by right-to-left order of the destination objects. Normally this is what you want, but if it isn't, then the [trigger] object is usually what you need to control things more explicitly. 
+
+## Getting help about a max object
+
+There's lots of ways to get more information about a max object:
+
+- Select the max object in question and open the *Reference* sidebar tab. The reference page also may have links to examples, tutorials and related objects.
+- Right-click and select *Help* (or alt-click) on the object, to see a patcher explaining how it works.
+- Mouse over the inlet or outlet to see a brief explanation of what it is used for.
+- Click on an inlet to see the list of messages the inlet can understand.
+
+
+# Patchers from class on May 10:
+
+First metro:
+
+```
+<pre><code>
+----------begin_max5_patcher----------
+493.3ocuT00ajBBE8Y8WAgmcIbQ7q9196XSSCNxNkFGzfX2YaS+uW.0LS2cp
+0LsouXfC3ky8bO26ywQ35tixAL5FzuPQQOGGEEf7.Qy6ivGDG20JFBWCqk+o
+q9AbxzQV4Qa.t2nz1Ezdgc28J896Lxc1ofCUbRJuLMqLAwRyHUYTZYUBJkSn
+NDJghtc9uUMgH5dkejsDwe2osZwAY3jeZTh1yOYP8T3Df4B1Drd7fR2JsARC
+m.6FsKnTO3Kww9OIaM6GOTKMqjmbdJAXrxbdBBnbBKmWxbqynqkm7ONO6EFG
+tUZtSpE0sgaP+zZ.aFcBx92d4TZfCUSDtVn2iQ2dMJ0k8ItTvzsh9kVTRnYo
+EELm9kwIbJ.TmmgCqoeoeM9D1E0H38znqWbrc626JgaqcA.fvK.FsvYiJH7p
+bHO+rkWRPXaw1rA+Arl+3pR85QqsSuVGD3lNvppx8NfJf3ZkxKyRPkEdGf+6
+kRX.+EjT+eAM7T3Vk9eGRFHtG+so5P2nY2R3lKDnSDtQNXUZgU4TfS2I6M24
+dUSiTedcpQM3KcMu+PqsxlzMvF3aiM7MvFOiguE1v1HatFsYxFI56eTZFlCY
+fHtdiG5L9s4IgsJ8z1fGEajOpVteX3DVXb8KVWyxnYZH2wxbbr+cdI9UwJMy
+C.
+-----------end_max5_patcher-----------
+</code></pre>
+```
+
+First sound:
+
+```
+<pre><code>
+----------begin_max5_patcher----------
+798.3oc4XssaiBCD84juBK+bVKe2v919crpph.dSoJwDANcSaU2u8c.RZnUo
+fSZDsU8gffwF6yb3LGFxiSmfmWr0VgQ+D8azjIONcxjlP0Alr65I3UIaSWlT
+0LMry92h42hm0Nj2t02DtJMYoEQQwHNEIoz8SXchO8lb2hqKso918gyiHblR
+IlgXLAQFwTwyPwwD5L3lITzU6t27rlkF1tevY6Wv+T37tjU1lg9UYdxxtiTk
++PyHLNrZsgcaVk6VZ8MvWeHXwF+9nrcQaC4uessEoXL5p5QdZ5z5CydeTTYh
+KqXEhMD2H4ZlFHmHIQnELfazQ8wMrnKC2vOMtI24OO5IsX0JKbyule.gCgLj
+1wzpcXJP7H4DUrIhKgyUzdoHS.TT4h40QoOyNgPZriRZzyQ0rY0baYf0McR8
+Ax7.JbVmTBw81xqstj4Kalw6mC38IblgvySbKtn0WPJTVzC+wjLhlKiEPEEi
+xHJMUYLyPP39HP9GR004yN9hEKfmggwCbv+UDI0P4jxPjwfyityoGkPDgnaB
+Pfb4cVluw6KbgJADThfRkFHg4fUarzvjcN8n4tDeAxu2gxeHOhtIn.LI.iBl
+hMjIQz2FOhCsovnz5ezPISFiXzTMutoEdejo4qTmJmhdhanDVrQnLComzeaz
+SgzS2K8aUDneWSsga+c0o9Z0T2oY8pMDCip35FkD2nEbUmSOFe7Y24kqojXi
+JlW6PXhIFvqPDMTkh3aSkR58oKs+KPBjyz0s5FI.AhT06GF9gTlTkuvAavYw
+O1GxRRCkHD7Xhd26vaIh5iGs0Db34U2OOoYsvKycu9uAnAY0weYtTUroLcOO
+r6I.5.hxrU9bWhOGLCNLG1KlyM4YYVWWcbVdUszN6s+1oPQScGZCCmnwCOQA
+fG93wOuZqdC9Y7viN.3XFMzXB.Mim1IDorZzPiJ.zn+bUmKGO3HBorhOd3gE
+JdXiCdB5sDi2yqPbkEiFZBQ7btZm12umrd8c1xpcKYCPftRtsn74O0DCcMzd
+YSWO3R6c46meSWD3jRnSEOzlxlx1tr1FowSq2mml9e.s.l3T
+-----------end_max5_patcher-----------
+</code></pre>
+```
+
+Modulate frequency and amplitude
+
+```
+<pre><code>
+----------begin_max5_patcher----------
+1070.3oc0XssiaaCD8Y6uBA8TagKAGdmEnOjWJ5K4KnHHPVhqiBjkb0kzc2f
+ju8NjRpVMvVVw6FmM.6JPOjhZlCOyLGoOtdU71p6cMwQ+VzeEsZ0GWuZUvj2
+vpgeuJdex8oEIMgkEW1seqqNdS+TGRZSeWd4t2V6Ra62FFyP.ikI1DARKwBZ
+oTuIRRIzMQL7ZzaFt47rvNVs88+J.i63cUkskI6cgodUcdRwwmUMZu0U+VWY
+x1hvJnStql7GC1.FYzL5r4kEt1fqCGMV00NZkMXs2T6CGb8gQbdYa7ln3sIk
+6hidieQeZ8Z+kMKEob+CFZideq69..EigPc0L3GHjDkUo4LD.MbB0vkZbr.l
+E.YWF.WBHwNIHAmCjtdzosZ2N7Lbg3.UPrJPnPRkTSD3XkZxvShH7kPbV.CA
+ligbUw91t11pxEF6L.HFFWnAbrfvs3HwjgmL1EwOCw20e390EfBKgw4RFDpR
+vzJNSNY3oBvuyw2YRsaRSJbeNhRh.7OJMbgRlCGvJjRkPYPbfiI6FIWBHyF3
+r4x14OSY6puN.qIeWI9.91PI3JIArLo0G9BimySE97cNQnzJobxvShIvKRNQ
+Qdo6yyD1Bfi8HEZJGY.XMdoRp4XrxUyR.neKK2yt.A3I0V7ttxz17ESEXXgN
+fQMf0iFAQD9LqShJL6yTIew4.f6JpRBxBF+e.GFVeRV1gJrsvfhpf21eYvqE
+LsQ4sABtjCgIDR7n1fcwj9ITJlh0OgRwI.x1Y5vtvEXkxvDZskHvzCaXqXVC
+1cneBudAoBj9dlCOWC16zHEBKyuXtgh2W+DVKgCbsILgBzTidzSm34W0gbSZ
+0gYo8bKP3ZLz7TcqhXkFpx5K70eDyO2QrId47X5U34oU6267R+9h73W854z7
+xwR2LkzGARPSLVf6E8Byq5koWPVb8tsgXg7z059rhG6OTj21k4hdcUVWQxER
+oQALDIEOkwxbHUjPApx.WFgju7QnyT3+Wli9Cl.8Gy0Q3vzCGRDNv19xYD4S
++tHx+oz1+bzm+n182ctxzGh9o+zU293OG86QUMo4E8LolnCt5nFWZUY13856
+jlV0U1NMDNEUCELKzbsuLm.qiHXg2eZfogYpmDa0+vRzReHsX1ZsSEYNAPPI
+3yov3GNpl6wrjzklzIgi0f5AB+0SlzckMbB6Ufz9Eeekfm4s++iklpt5zQbX
+3cbhN5QYtl17x9xrGWiWz6jE8t7rLW4TwNY4Md8OYmmysT2w+EFtn+.ham+.
+Kwe7NMba7G9R8maD9rD9ys63huD5C+14Nzk3NrWV9iu++MhMyWR1k+8sdIgO
+9WN3F4OgPGtD+gd6vmkRetQEeVDc9Jcm9NqIGN7AWcyvVF7DTOv6qp+uOrUL
+1ut+mA8Fw0tOjOt9P+63jZTiPKJPnqtWey8FU7Z+y4Sq+W.ttytF
+-----------end_max5_patcher-----------
+</code></pre>
+```
+
+-----
+
+# Assignment 1: Alert!
+
+Create one (or more) alert sounds. They could be for a phone text message, mail received, or a calendar or clock alarm, or warnings or other events for a game. Whatever it is, it should capture attention, and convey nuance through its sonic shape.
+
+Start from the patcher below (copy the text and in Max select File -> New From Clipboard). 
+
+Only use the objects that the patcher already contains, but connect them up in a new way. You don't have to use them all. 
+
+Your sound should be triggered from the large [button] object, and should become silent after one second. The final sounds should go into the first inlet of the [clip~] object at the bottom right.
+
+```
+<pre><code>
+----------begin_max5_patcher----------
+1959.3oc2a0zbihqEccxuBUdy7QmlBARBHa5Z9XSun2L07V7pd5pKLHaqowR
+t.QR6Ypo+s+tRBrwoAhcZhcdSpXhsjLHct26Qmqjxee8Uylq9LuZF5Vz6QWc
+0ee8UWYKxTvUMe9pYqS+bVQZksYyj76Uy+yY23pRy+r1Vb11rB9WPXlueacK
+TRsLcM2V+OUJRKZqQVuVHK3Z6cLXegpZcao3N2jJweYuI3.O+lh2jpyVIjK+
+XIOS659TepWBlEQhuAEDm.MEEQMWC787Qen4KJxscGXH75n1ti6wp2tg6tSy
+pDKkPuE8AS8+y0WatbyQhOYp0q4R8WAPuEogN7mLWqPUpZYNRT444chnEtWz
+pEVVTtbt8y6.pCvO+wvuvjHCZEZwrPL0iwXQX.Lww8iegylP3IOUyuE8tzsH
+L8ECjfIA6gDbfEeFBMHSIZXF02hdyadyKFnHfkzAJB8GCJnSIT71eEnH7gmn
++Iyr7b5Xz0uHdLvfMkfwuwWyWOmWhzJjttT5XSTx1FVHj7LfaQ2kX8xiVzHO
+5MHVn8OItXpvNv0754yK3c6Dc.P7TBf+hRBHjFsUUWhVH.VdjiruBIjFPcEG
+JtrRCebSsFoVfxJDat81dQXxEAgcnUkH2VQ3i4kRCRLvdr0KkROVXmj7Tv8g
+TG.X3WPuFivmXHb3DIN.66vBhkCm4Olt.R7yhvfAfle7KWH8RjjXidIVbDDM
+Rbr6AFOkAwkyqfoepnRYhSQYoRT1pT4RtM7Lqt7NtIb07oJHbsVloEJIB5iv
+fq51WPjgGFpFbjFiHqwHHv5kRhO5H1Icpl+aCxmZLCMvOfFlIeRKWVa9NfQX
+g0BUH9DG88bukdtVBiMz6eEB+AGoJ71vO7CdndMLrW1bnDVWgvX6L89148iN
+dCyjJH52gX.W9CUqT0E4n4PbQoX4RdIOGUWY.eqrf40ZsR50KpG9hQafaRJF
+yIkx54SHGMxNopt+O.ahRVr0Ryzvl.nag5du+P9N0cV9m0f6uE8SgWYMxIrk
+WuwPJkKVr.rDRM59zsUH.uEE6CRteUJHsPixU.E12atEvshC5MLu89Uagnj+
+PZB8xUxuSiVkZdnJvpxg.wBibDyipeaJ8ENEWmHIW54AtYiMQUGo4dRS47co
+fAwxvwK0MgTy21ZScgQ68CDMhssiLd4H4si9YEDU9VcZgHa5Q93GOuDmROB0
+KD9AGB.cz.ynG7TvSsZ4RvDc7iL7vcXFM1Cl1yNuGNZmrrGHBYSZIfvZd4G4
+xzF2C+dFN9CJPQXBQlPUaPuoTgnWp055.XKwYuiGSSa3vZZmCSXOoXSdYs7S
+.EgOhdgT6SYQVe+HhQFkEXhHiBOQmMOmWcoz6y.Ykmjd+vvyYdPu5KfKykBZ
+.ffbHzPvi5uPNuoHhBtTKpdB0iF6hjNNmlfyLx36QuTXiI0rCwF25EOH1feV
+vlpL0F9NVk40KZ69LxXC+rzhrcZGiGURReqGbRnWbCEKM1Qt51tEa5Q8N78m
+vUT5GujF9f86zTHlseofGxvGjLngeQgJcZmfoDRkPs1L+6khMEhEXMhSZm8c
+b34YX1W.WgwwjrgAAmNB.NEwsZuoVlA5SVUa.6Qbdt4aQC2EEmnzn84n7MiS
+z+0hSrnfIzeh7bhSCPJUAy1vQXylnhdM1CgO088lMUjSAj8R8bb2X+vQYmFV
+F7zpk4xo+kB9WObBsQU4EDb9xW5Rs8Hwz8p6NJL47s5Clk8aZRi7IvYGXyUx
+5qPbK8PHar3G7itcZeaDyMa+yIP.SFaeX7siNyhTRZNvGXq3EVvoS0hSdbp1
+1WMHPS6Syy2n.2llilkkr2c4F6oRIlFgIQlxBCHvu1JXfkKfPhiBMUPnIvut
+uguem6v+V7DYPN5sofbbdhz+OxSj4mrez8s6IRdV7Dg7fnQDmiXbfY08skG3
+G4QHrX+XSEQjcU774H1b9CieArNIMG9P5n47fOqKtVC5P7ujKX8CvG1nKXM9
+4YcjJD2w8VlJj6HstKsbGN7001aL7lRdEWpSMA6cm6vZvcWcxyC6tRH8G4Ws
+Rce6yu286I7XNVKtEfAGx9pmZe7CsiCUoncXLzYux+HXLMu1QhTHpz6IOLmF
+.Iu3.zqJ8Nd9GS05Rw7ZMe+6pZraMFNioonlqVzVba4cGT0RgtRu0MtZvzCZ
+vZv7ayenEFePsB6P+0Q98Vu.t8lPC6PFPi1A1AMpETF4F70f+AsBbBJ0C6Ed
+Pag7PW1WScszFNz9mSL1f+W4oY6772TpzJyPa2CaEuXyBw.67WKQwbUYNuLS
+UnJamvf5iSX3a58c3ACP1s+xK6bybm+htW53nOTzAKjzdpBd3YKv1YsVEuHZ
+OR52sfsEpLma.9I.rtChwzrgocOtDI31q8lOxIrie1uuUL2C9eAv1CLke3vq
+RUWl0d6ZOybn8cibdkVH2wr79cK.b2FsRjmykcs0qEGn0.CjePBWT2pGFBoo
+2tod1h1+zDUlnK6P2uW6yjNLvO1vXB6O9GCrFe15OlDZP3GCeNi8Gxwzenmu
+9ywXuLrJu35O3mP+wwZjtYyc7xpl6osq.ze+oix1trcPbsz8QKw1rR9ch11a
+m2XVZIvyoARt5R2bMeN1bXFgmy+b8+C.77pUE
+-----------end_max5_patcher-----------
+</code></pre>
+```
+
+-----
+
+# Assignment 2: Sonify your mouse
+
+For this assignment you'll make a sonification of the mouse, as a new kind of musical instrument. 
+
+Your instrument should start making sound when the mouse button is pressed, and keep making sound while the mouse is still being pressed. It should stop (or become calm) when the mouse button is released. Whatever sounds it makes, while playing, the sounds should be modulated by the X and Y positions of the mouse.
+
+It will work in the background, so you can keep it running while you do other things during the day :-)
+
+You can use any objects we have seen so far, or try something new! Here's the starter template:
+
+```
+<pre><code>
+----------begin_max5_patcher----------
+2040.3oc0ZsziiaiD9r6eED9R1.3wPTOs6KCxtAA6jiIG1MHyfAzRz1bZYRA
+RptmNAI+12hjRpkrkjezd5s6AXrZyWUUeUUr9Hk+yalLck3qT0TzsneGMYxe
+dyjI1lLMLo56Slti70zbhxNropBZpVJTohB5eOclaD7xcLdNUaGheUiEDc5V
+FeymkvLbhvOJXt2LT7hElGg9dlGQvWPepZRrLqTDq9x678as7hRc85iqZ00j
+9wBpawmNE8ISO+0M2X9X1IZPohc6nbcsrzzuZU1o+jPhzaYJDLP1FtYLnGEk
+eWdNZG4NJhfTBNaMKknYBNRrFFMEAJphNClCzOm9.5NFOyz2tRELxbDiqzxR
+yhMG8Q9G4+lnT1pQjZqnLOCozDo1HG.+.4TBKxCao7mDAZUoVChEzuBIUonY
+fPgQcGkVr+7X4zVSDlgRy.qXE0LnpYOG8gVBWTf9Gf4uhBfCEA58tueX4Ko4
+ThcILFz+YKQSumJcRWgXVyfplUoHE4jGA4NytTUioRtqLqcVYNr.vWdzNh+q
+0p9MTgPwL3rpCPO2HQPwevXOOHj2APos2Ujz61HMq9LPHF+FXEbG5.ZjrjyM
+FuSkL8lIPBXhVWNeiBkUJMCvrVYjGQ29tu+i75PjbFG.lRtMNAG1WN.djb.O
+avu+xXyi.uHyC7xvARB7pk5ZAWyI6rA6S+AIij2e5gW83kaVY+975VVUtZUN
+sPvbZt27kwsVaE6OrqM1uYBlXCHnzFf2xBBVZs.bn+7nY1027wUM46eSk1H0
+Vgs7hRM3KzDjVffV50aDLlyvY+Gy8Da2hZYfw1V5a2mZ.eCdw0y2zwC3cLO.
+F7.wv+7iA2f+hJOv02M7KzczcqLYEBjtTxcaHJ5OSv+Yi83H+FyppFgyCDDL
+fG3amC3Jhh+KAGfIa0CIZMiCkALUTH4vtibCxBA4qYRktJHG1gKMmUb6s8By
+gOaXd4bbEHGsvF13f5nn9A4vkeyCycpshkY6H3BvdnVKnqG.8Fb7uQuCiv8R
+UIXDPpEJsLwrYPrEq78F.kN6MCviu46AzabwLWFImKjtVhMvHN.ar+fk1RU.
+EtnF.XU45ZUON7PPIva7.DfYQZSf8hKvtxY2Smugv3M118DYC3eXumZQ5Vd+
+JqGG3pWOPRBd.KMrQFRPqzT4mobxdonBIqdO91MCrhdn1TZ.rsDXuj7gieBN
+Z7yLfnL7+04Bh17G4LEXzeZ7BNIVWu6yHuC.BE4dZ1mIZsjA7BoO8WpJeWky
+y3dxKoh00MW2da.pVkqLjN8w3.KPR9gfXmQAHmTObTPmwlK3aNwgVBBWoezI
+2vdFvNH1zlJL2q2dYV+66R7lOhs4.bHfxknWkRT+3LyOn+QFIsI5uPJzBC71
+Xvao4EqANvm6NCsyOVDZxOLjjFlpjOd7MBxEoNKuoP1lTQtPVwKvR2r8GOsA
+jPlQsCCOOIpSisV.u4Qd3kw3Y89W3qLqoOXODwcNxRsNaGSMe97ycmnPOa5V
+nkUZ.NxPPJAu.z5AN1LN5MAoHfIO8VzOWxonnyESvNzv8I1Ow9XH3H9MAbXT
+raQu+8u+bwB+jVwG3.uwvh2FQFe3Ggsd7.SA92YGYD0NvXwnAFIuIPie0bIS
+O5N6f6NON+8PbnB1RfIJbokFax.zX8GFUP+SQdF5CZRNK8YgPKtHDZ.J9ENX
+wby.8hKdGCWRrUtvIVR9CQuGGdtQKAmI8dysxLqyimHkYTcWUt1boLEtumJU
+c4MNYJonnUycoYsi7EWQw3FFH.V4Z5IpTR58r5462zJQB.nFPuRoy5+5h3o0
+bTpE99bFwXa7VbnaapEsvWSUdnv+czr1z8lBmTgCGDtEQzNcmQWSJy0etebs
+a+qIozAmbuNwIS2HYYBtQI5LSSy0hqIiJpswXGAmTzyjUfcTpVQjFXsh3ZMt
+NUKD4c6pwSBIDDNaGTpTybJquWyhx1UHquJu51b7h2pRkh77NKkqm66omLvY
+mRefko21Im0zCLbVQsKXZCFkw1PU5tsoIaTcaoy6VncTX6L8NsOVFe2rdfxr
+TfZtczAIuNTpu6PLUbGhVr+I62O8eQa4LbvyfGxejcB5e2fUD9lo0m.n4L.0
+aWdkAS3nfY6nJUysjLX0ki.mNtpI9GCNSdogyWLnzVKxjtSelPYjspTRvwfR
+7kBkQWHTdXcp8qZcEQZmzedPoefEJ8ip+bPnDOLZ0FRpopY2r6Uiw5duEmtw
+5+V1XSRNOiM35XrOUr2bk7CTayptl96GET.S9z5jopZKntZNT2Uy3MTe98lL
+88F2VVVVWlFthyJSodGopSxictZbxIpwKd0nw3SEiwupTY7onx9upTY+SQkC
+tRpbUsl5SeTcOzfHfMJF4RnetGQ33GA4L3M2qRLhvGRnvQoVQxqNpXyb6gd9
+keaxZwlMCbWwG+1G7r+ZAfiAV8YemxNd72TVeuDkQOO8EcstqyEf3O62XT3b
+eyqIxcKKI1e9.CdIKm6cI3eB.v92vxP3RyK9o5HFi+he7Wtzc2QIO6ejAWFt
+hcPYMt5OFtF7ZBWagPVcsKkAGfs+FrUv1AarF1oR5.6p52oPvg6nNcGKy9i+
+oRIvdO8iHIFXOYBe8is.r6qOIu82F9.O+U0PLu03migXriEI01w+2LC7wLiq
+m9rmnFH9.+JTevuL5S3InOwubvSXGKue0I7kUc7OVR4EpNt8916JoMZxdWE8
+dWC8gWA8PW+LHm+5l+GfuW6T7
+-----------end_max5_patcher-----------
+</code></pre>
+```
+
+-----
+
+# Submitting your work
+
+Unfortunately there's nothing like OpenProcessing for Max yet (maybe later this year?)  So instead, please submit your Max projects directly to me by email at grrrwaaa at gmail dot com. 
+
+Make sure your patcher is commented with:
+
+- Your name
+- The date
+- A description of what it does (or should do) or how to use it
+
+Remember you can create comments by adding a [comment] object (you can create comment objects by pressing the 'c' key). 
+
+Please send me your Max file by selecting the whole max patcher (select all, or command-A), then choosing File->Copy Compressed to copy it to your clipboard, then paste into your email. Include your student ID number in the email subject. 
+
+Assignments are due every Wednesday at 3pm. 
+</div>
+<div id="wrapper">
+	
+	<div class="header">
+		
+		<h1>ANT3010</h1>		
+		<a href="index.html">Overview</a><br/>
+		<a href="dmaworkshop.pdf">Syllabus</a><br/>
+		<a href="finalproject.html">Final Project</a><br/>
+		<br/>
+		<a href="processing.html">Processing</a><br/>
+		<br/>
+		<a href="max.html">Max/MSP/Jitter</a><br/>
+		<br/>
+		<a href="maxprocessing.html">Processing to Max</a><br/>
+	</div>
+	<div class="section">
+		<script type="text/javascript">
+		//var converter = new Markdown.Converter();
+		var converter = new Showdown.converter();
+		document.write(converter.makeHtml($('#sourcetext').text()));
+		</script>
+	</div>
+	
+	<div class="footer">Haru Ji & Graham Wakefield, 2013</div>
+	
+</div>
+</body>
+</html>
