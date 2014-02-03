@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>3D Modeling and Texturing</title>
+    
+<link href="css/site.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="css/highlight.default.css" media="screen" rel="stylesheet" type="text/css" />
+  
+<script src="js/jquery.js"></script>
+<script src="js/showdown.js" type="text/javascript"></script>
+
+<link rel="icon" type="image/x-icon" href="favicon.ico" />
+</head>
+<body>
+<!--
+Write the markdown code below.
+A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
+-->
+
+<div style="display: none" id="sourcetext">
+
+[Maya 2014 online Help](http://download.autodesk.com/global/docs/maya2014/en_us/) 
+# Maya Shading
+## Lighting
+### Indirect (global) vs. direct illumination	
+![gl01](img/maya/shading/gl.png)
+
+Indirect (Global illumination)light is all the inter-reflected light in a scene. Global illumination is an approximation of real-world indirect light transmission.
+
+Direct (local) illumination is only the light provided directly from a light source (such as a spot light). Direct light is emitted from a light source and travels in a straight path to the illuminated point.
+
+![gl02](img/maya/shading/illum.png)
+
+Ray tracing is a technique for generating an image by tracing the path of light through pixels in an image plane and simulating the effects of its encounters with virtual objects. The technique is capable of producing a very high degree of visual realism, usually higher than that of typical scanline rendering methods, but at a greater computational cost.[-wikipedia](http://en.wikipedia.org/wiki/Ray_tracing_(graphics))
+
+### Cornell box
+![cl01](img/maya/shading/cornell.png)
+
+The Cornell box is a test aimed at determining the accuracy of rendering software by comparing the rendered scene with an actual photograph of the same scene, and has become a commonly used 3D test model. [-wikipedia](http://en.wikipedia.org/wiki/Cornell_Box) 
+
+Cornell box lighting examples: [1](http://courses.cs.washington.edu/courses/cse557/08wi/projects/final/artifacts/jjohn-isdal/), [2](http://graphics.ucsd.edu/~henrik/images/cbox.html)
+		
+### Light sources in Maya		
+Maya has a number of light sources that let you achieve a wide variety of lighting effects.
+By default, Maya scenes do not contain light sources. However, Maya’s default lighting helps you to visualize objects in Shaded display in the scene view (press 5). If you turn default lighting off and have no lights in the scene, the scene appears black (see Default lighting in Maya for more information). By controlling its intensity, color and direction, light becomes a key factor in creating a scene in Maya.
+With Maya, you have much more control over the placement, intensity, and characteristics of lights than you do with real-world lights. Shadows, specular highlights, diffuse, and glow all contribute to how light affects a scene.
+
+![light01](img/maya/shading/mayalight.png)
+![light02](img/maya/shading/lights.png)
+
+Light Attribute Editor
+
+![light03](img/maya/shading/light.png)
+![light04](img/maya/shading/spotlight.png)
+
+#### Absorption, reflection, and refraction of light (Lighting and Shading > Lighting > Basics of Lighting > - [Maya Help](http://download.autodesk.com/global/docs/maya2014/en_us/)  ) 
+
+The color of the objects we see in the natural world is a result of the way objects interact with light. When a light wave strikes an object, it can be absorbed, reflected, or refracted by the object. All objects have a degree of reflection and absorption.
+
+![light05](img/maya/shading/lightwave.png)
+Image from http://physics.tutorvista.com/light.html
+
+![light06](img/maya/shading/diffuseplus.png)
+![light07](img/maya/shading/refractionplus.png)
+
+#### Light Decay (Lighting and Shading > Lighting > Basics of Lighting > Direct light sources > )
+
+In the real world, a light’s brightness is strongest at the light source and decreases or decays further away from the light source. In Maya, a light’s brightness decays only if decay is turned on (see Decay Rate). The light’s color, however, remains the same no matter how far it is from the light source.
+
+![decay01](img/maya/shading/decay.png)
+
+You can also create decay effects not seen in the real world (only for a Spot light in Maya). For example, you can use a custom Intensity curve to make a spot light’s brightness increase further away from the light source, or you can use a custom Color curve to make the color of a spot light change with distance.
+
+![decay02](img/maya/shading/decay01.png)
+
+### Creating Shadows
+- Define from light sources
+
+![shadow01](img/maya/shading/shadow.png)
+## Materials
+### Creating Materials and Textures	
+
+Different materials
+![mat02](img/maya/shading/material.png)
+
+![mat02_01](img/maya/shading/metal.png)
+![mat02_02](img/maya/shading/specDif.png)
+
+Maya material attribute editor and how to link textures
+![mat03](img/maya/shading/shader.png)
+![mat04](img/maya/shading/shading.png)
+
+Hypershade Editor
+![mat01](img/maya/shading/hypershade.png)
+
+## Making
+1. Preparing Cornell Box: practice with Lighting and Materials using Layer Editor
+[Reference](http://members.shaw.ca/mayaforall/Maya%20Beginners/BG%20Programs/BG%20Resources/Part_07/corn_box_light.htm)
+
+## Review
+- [Tumblr](http://ant3012.tumblr.com/)
+- [Google doc](https://docs.google.com/spreadsheet/ccc?key=0AkH7zcNiVdpudFZmN3YwaHhveTRVZUEybTBjc1VMUFE&usp=sharing#gid=0)
+- ADs (supplementary class and so on) + feedback
+
+## Next Class
+- More practices
+- 3 Point Lighting
+- More on Texturing
+- Rendering
+
+## Mid-term project
+- A rendering picture (Full HD: 1024 * 768) of still life with your sign and title.   
+	Option: your sketch + research/references
+	
+## Camera properties
+
+- Create a camera with a aim (Create/Cameras/Camera and Aim) and check it at the Outliner (two plane mode -> at the left panel or panels/Layouts/Two Panes Side by Side).
+- Choose the camera and transform Snapping the Aim to the main focus point of the object). 
+- Adjust the position of camera (panels/Look through Selected)
+- Choosing Camera properties: (select Camera -> Attribute Editor)	
+	- Angle of View, Near and Far clip, Film Gate   
+	  	
+	![sp03](img/maya/shading/camera.png)
+	
+- To render the scene, check the Render Settings.(Window/Rendering Editors/Render Settings)
+	- Work on Common settings
+		- File name, Image format, Choose camera, Choose Image Size
+		
+		![sp01](img/maya/shading/render_common.png)
+		
+	- Work on specific renderer settings -> Maya Software
+		- Quality, Anti-aliasing, Raytracing, Motion Blur
+		
+		![sp02](img/maya/shading/render_maya.png)
+		
+- Cleaning the scene (grouping, naming, delete History): preparing next progresses or more complicated works
+
+- Preparing the portfolio (group vs. individual)	
+
+20131030.
+# Working on the Cornell Box
+
+## Goal
+- Make Soft Shadow
+- Lighting: using main and an ambient light
+- Lighting: three-point light [3-point lighting](http://www.3drender.com/light/3point.html)
+
+### Making  
+1. Open the Cornell Box scene and Save As as title_02
+2. Create **Soft Shadow** using Depth Map Shadow
+3. Create **Soft Shadow** using Raytracing
+4. Modify Glass and Mirror ball shading attributes
+
+### Goal Rendering Image
+![goal](img/maya/shading/raytr.png)
+![cr01](img/maya/shading/goal.png)
+
+Lighting & Soft Shadow
+
+![shadow](img/maya/shading/softshadow.png)
+
+### Reference attributes example of glass
+
+1. Find a photograph of a glass for reference	
+2. Material Attribute Editor (Hypershade):
+	- Color: black
+	- Transparency: Value 0.9
+	- Specular: Eccentricity 0.05, Specular Roll off 1.5, Color white, Reflectivity 0.2
+	- Raytracing: check Refractions, Refractive Index 1.33, Refraction Limit more than 2
+3. Render Settings: turn on the Raytracing attribute
+
+Glass rendering reference [image](http://www.thisiscolossal.com/2012/08/a-glass-sphere-solar-energy-generator-capable-of-converting-sun-and-moonlight-into-usable-power/)
+
+![glass01](img/maya/shading/teapotGlass.png)
+
+Glass material attribute setting
+
+![glass02](img/maya/shading/glass.png)
+
+* **Refractive Index:** in optics, the refractive index or index of refraction n of a substance (optical medium) is a dimensionless number that describes how light, or any other radiation, propagates through that medium. For example, the refractive index of water is 1.33, meaning that light travels 1.33 times slower in water than it does in vacuum. [Wikipedia](http://en.wikipedia.org/wiki/Refractive_index)
+
+### Review: Camera Settings / Camera Attribute Editor / Render setting
+Make a close-up camera
+
+![cr](img/maya/shading/camera_render.png)	
+
+Close the Cornell Box
+
+## Review
+- [Tumblr](http://ant3012.tumblr.com/)
+- [Google doc](https://docs.google.com/spreadsheet/ccc?key=0AkH7zcNiVdpudFZmN3YwaHhveTRVZUEybTBjc1VMUFE&usp=sharing#gid=0)
+- AD: 20th anniversary
+Seoul International Computer Music Festival 2013
+Oct. 29 - Nov. 2, 2013 @ Jayu Theatre, Seoul Arts Center, Korea
+[Schedule](http://www.computermusic.or.kr/)
+
+## Next Class
+- 3 Point Lighting [3-point lighting](http://www.3drender.com/light/3point.html)
+
+20131106.
+# 1- , 2- , and 3- points lighting
+
+## Goal
+- Understand 3-point lighting
+- Creating 1-, 2-, and 3- point lighting
+
+### 3- points lighting components
+
+**Key light**
+
+The most intense light in a scene. The key light's source is generally identifiable (the sun, a lamp, and so on). The key light usually produces the strongest shadow in the scene.
+
+
+**Fill light**
+
+A secondary light that is less intense than the key. This light "fills" in the dark areas of a subject and the shadows produced by the key. Fill lights often represent light from a key that has bounced off a surface, such as a wall.
+
+
+**Rim/Back/Hair light**
+
+An intense light source placed behind a subject that strikes the subject along the edge. Rim lights are commonly known as backlights or hair lights.
+
+## Using 3- points lighting
+#### 1-Point Lighting
+The 1-point lighting scheme is dramatic, sometimes stark, and often foreboding. The lighting involves a single, easily identifiable key light source, with no significant supplemental sources. 
+#### 2-Point Lighting	
+The 2-point lighting scheme matches many of the lighting scenarios we encounter in our everyday lives. The scheme often involves a strong key and an extremely diffuse fill.
+#### 3-Point Lighting
+The most commonly discussed and applied lighting technique is 3-point lighting. 
+In the standard 3-point lighting scheme, a strong key is placed to one side of a subject (approximately 15 to 45 degrees off the camera axis). A fill light is placed on the opposite side and is at least half the intensity of the key. A rim light is placed behind the subject so that it grazes the subject's edge.
+#### 4-point Lighting
+Four-point lighting simply adds a fourth light to illuminate the background or set behind the subject.
+
+![3pl00](img/maya/shading/lighting/threepointex.png)
+
+[Standard 3-point lighting applied to a mannequin, Image from Advanced Maya® Texturing and Lighting]
+
+## Reference
+Book: Advanced Maya® Texturing and Lighting, Second Edition.
+
+![3pl01](img/maya/shading/lighting/threepoint.jpg) Image from Toth Edina's Blog.
+
+### More reference
+- [Rembrandt](http://en.wikipedia.org/wiki/Rembrandt)
+- [Caravaggio](http://en.wikipedia.org/wiki/Caravaggio)
+- [Audrey Tautou in both Amelie and A Very Long Engagement](http://dknicholas.blogspot.kr/2010/11/process-close-up-lighting-and.html)
+- [flickriver:3pointlighting](http://www.flickriver.com/photos/tags/3pointlighting/interesting/)
+
+### Practice
+- Scene preparation: tip - using Grid snap + Modify/Center Pivot & Modify/Freeze Transformations
+	1. a pedestal (a box or a cilinder)
+	2. a suface back-wall (Create Curve & Loft)
+	3. Import character bust or torso obj file (you can download from our class note or /GettingStarted2014LessonData/) 
+	4. Align them to create a good studio environment
+	
+	Example studio
+	
+	![3pl02](img/maya/shading/lighting/studio.png)
+	
+>- Obj file
+
+>	1. Open 'Toad_hi_res.mb' file from GettingStarted2014LessonData (GettingStarted2014LessonData/UVmapping) 
+>	2. **Export** (File / Export Selection..) [.obj file](http://en.wikipedia.org/wiki/Wavefront_OBJ) (first, you need load objExport.bundle from Window / Settings/Preferences / Plug-In Manager)
+>	3. Save the obj file in the Data folder in your working Maya project
+		
+- Set-up the camera & render setting
+- Applying Key light: once you make any light, the default Maya light will be turned off. recommend using Spot light (tip: position the Key light using Look Through Selected Camera from a view panel menu. In the Attribute Editor, change Cone Angle and Penumbra values, and select Depth Map Shadows (Resolution: 512, Filter Size: 4). Render a test)
+- Applying Fill light: recommend using Ambient light
+- Applying Back light: recommend using Directional light
+- Experimentation: experiment to create your style and to fit to your goal/intention.
+
+	![3pl03](img/maya/shading/lighting/ex.png)
+	
+	Image from Maya ® Professional Tips and Techniques
+
+## Review
+Some suggestion for the form to submit:     
+	- Submit one folder, shows your school id_name, which has all related sub files.    
+	- Documentation file as pdf.     
+	- Send your final .mb file.
+
+## AD/Next Class
+- No class on Friday (school holiday) 
+- Cornell Box with glass and mirror materials & Finishing three point lighting set-up
+
+## Homework
+- Submit **your three-point lighting rendering result to Tumblr by next class. Please write your school id and name.
+
+20131113.
+
+## Review mid-term projects
+
+## Practice more light set-up & Cornell Box Box with glass and mirror materials.
+
+### Light test
+
+#### Check one light each time (in the Light Attributes):
+- Turn on/off Illuminates by default.
+- Change the light Color
+
+![test01](img/maya/shading/lighting/test01.png)
+
+#### Change more attributes in the Spot Light Attributes.
+- Decay Rate, Cone Angle, Penumbra Angle, Dropoff
+
+![test04](img/maya/shading/lighting/test04.png)
+![test02](img/maya/shading/lighting/test02.png)
+![test03](img/maya/shading/lighting/test03.png)
+
+#### Practice more
+
+![test05](img/maya/shading/lighting/test05.png)
+
+## AD/Next Class
+- At 4:30 today, there will be a special lecture in the classroom by Chansoo Kim from Digital Idea: the role of animator in the animation production pipeline. 
+- Organic Polygon modeling (face)
+
+## Homework
+- Submit your new lighting set-up rendering result and Cornell box to Tumblr by next class. Please write your school id and name.
+
+## Final project
+- Let's start to prepare the final project which can imply your interpretation of 'Time'.
+
+</div>
+<div id="wrapper">
+	
+	<div class="header">
+		
+		<h1>ANT3012</h1>		
+		<a href="index.html">Overview</a><br/><br/>
+
+		<a href="mayafundt.html">Maya Fundamental</a><br/>
+		<a href="mayaNURBs.html">Maya NURBs</a><br/>
+		<a href="mayaPoly01.html">Maya Polygon I</a><br/>
+		<a href="mayaShade.html">Maya Shading I & Lighting</a><br/>
+		<a href="mayaPoly02.html">Maya Polygon II</a><br/>
+		<a href="mayaTexture.html">Maya ShadingII: Texturing</a><br/>
+		<a href="mayaRender.html">Maya Rendering</a><br/>
+		<a href="mayaDynamics.html">Paint Effects</a><br/>		<br/>
+		
+		<a href="toad.obj">Toad high resolution obj file</a><br/>
+		<a href="toad_low.obj">Toad low resolution obj file</a><br/>
+
+	</div>
+	<div class="section">
+		<script type="text/javascript">
+		//var converter = new Markdown.Converter();
+		var converter = new Showdown.converter();
+		document.write(converter.makeHtml($('#sourcetext').text()));
+		</script>
+	</div>
+	
+	<div class="footer">HyunKyung (Haru) Ji, 2013</div>
+	
+</div>
+</body>
+</html>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>3D Modeling and Texturing</title>
+    
+<link href="css/site.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="css/highlight.default.css" media="screen" rel="stylesheet" type="text/css" />
+  
+<script src="js/jquery.js"></script>
+<script src="js/showdown.js" type="text/javascript"></script>
+
+<link rel="icon" type="image/x-icon" href="favicon.ico" />
+</head>
+<body>
+<!--
+Write the markdown code below.
+A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
+-->
+
+<div style="display: none" id="sourcetext">
+20131122/27.
+[Maya 2014 online Help](http://download.autodesk.com/global/docs/maya2014/en_us/)   
+Reference: The Art of Maya, 3D Animation Essentials.
+
+# Maya ShaderII: Texturing
+**Shading** is the proper term for applying a renderable color, surface bumps, transparency, reflection, shine, or similar attributes to an object in Maya. It’s closely related to, but distinct from, **texturing**, which is what you do when you apply a map or other node to an attribute of a shader to create some sort of surface detail. Nevertheless, because textures are often applied to shaders, the entire process of shading is sometimes informally referred to as texturing. Applying textures to shaders is also called texture mapping or simply mapping. You map a texture to the color node of a shader that is assigned or applied to a Maya object.
+
+In the real world, objects are seen in specific ways based on the following:
+
+- The materials they are made of.    
+- Their surface textures.    
+- How they are lit and reflect light.    
+- The environment surrounding them.
+
+![shd](img/maya/shading/texturing/shade.png)
+
+In Maya, you provide your surfaces and objects with these characteristics by assigning shading materials to them.
+
+Shading Materials provide instructions to the renderer so it can simulate how the surfaces in your scene react to light and appear in the final image. Shading involves such attributes as color, transparency, shininess, and many others to create a realistic look.
+
+Editing the material attributes associated with shading materials affects how they appear in the rendered image. In this way, Maya provides the option of allowing you to create images as they would appear in the real world or in your imagination.
+
+## Shader Attributes
+**Color**: is the color of the object, such as red or blue. This can be a flat color or a texture map.
+
+**Ambience**: is the amount of ambient color that will affect an object’s surface. Ambience in the surface property is a simulation of even flat lighting coming from every direction onto the surface (this is not from an actual light source). 
+
+![shda01](img/maya/shading/texturing/ambient.png)
+
+**Transparency**: is how transparent or see-through the object will be. This attribute is used to create effects such as glass.
+
+**Reflectivity**: is how reflective the object will be. The reflections can come from raytracing or from a reflection map.
+
+**Refraction**: is the change in light direction caused by a change in speed that occurs as light passes through a solid, transparent object. 
+
+**Translucency**: is the amount of light that can pass through an opaque object such as paper or canvas.
+
+**Incandescence**: is the quality of self-illumination—for example, a computer monitor that is emitting light or a lamp shade with the light on.
+
+**Specular highlights**: are bright spots that appear on an object’s surface when light shines on that object.
+
+**Glow**: is a standard attribute that most 3D applications can simulate to aid in the effect of self-illumination. 
+
+![shda02](img/maya/shading/texturing/glow.png)
+
+**Bump**: simulates a texture along the surface of an object by adding shadow and highlight effects along the surface. Bump maps are grayscale images in which a mid-gray color represents no change in the surface, black represents inward changes to the surface, and white represents a push outward in the surface. The bump map manipulates the surface normals to change the shading properties and make the surface looked textured. 
+
+![shda03](img/maya/shading/texturing/bump.png)
+
+## Texture Map: procedural vs. bitmap
+These two types of texture files, procedural and bitmap, are plugged into the shader properties as maps.
+
+### Procedural Maps 
+Procedural maps are mathematical algorithms that create various patterns such as cellular, ramp (also known as gradient), grid, wave, fractal, and checker.
+
+![tex01](img/maya/shading/texturing/proced.png)
+
+#### Advantages of Procedural Maps:
+- **Resolution-independent**: Because these texture patterns are created by math, you can zoom in as close as you want without losing any detail in the pattern. This is helpful when you don’t know how close you need to get to the object.     
+- **Seamless**: Procedural textures are seamless, so no matter how much you scale them, you will never see a seam or repeating pattern.    
+- **Projectable**: Because they are mathematically generated without seams, most 3D applications will allow you to project procedural maps as a movie projector would, toward the object in a seamless manner. This projection technique allows you the freedom to not use UV maps, which in some situations can be useful.
+
+### Bitmap File Textures
+Bitmap file textures are the standard picture format that you would use in an image-manipulation program such as Adobe Photoshop or Corel Painter. These are widely used because you have a lot of control of these textures and can even use real photographs as the starting place to achieve realism.
+
+### Drawback to bitmap images:
+- Resolution-dependent, which means that after you zoom into them beyond 100 percent resolution, they will pixelate and distort. This is not a big problem as long as you plan ahead and make the texture resolution large enough for your purposes.
+
+#### Standard types of texture maps
+**Color maps** indicate the color information only for the object you are trying to create. 
+
+A checker map applied to a sphere through the use of UVs. 
+
+![tex02](img/maya/shading/texturing/color.png)
+
+**Bump maps** are grayscale images that affect the surface of the object by adding shadow and highlight to mimic a textured surface. Bump maps do not actually change the shape of an object. 
+
+![tex03](img/maya/shading/texturing/bum_map.png)
+
+**Specular maps** affect the way the specular highlights fall along the surface.
+
+![tex04](img/maya/shading/texturing/spec.png)
+
+**Transparency maps** allow for varying degrees of transparency across a surface.
+
+![tex05](img/maya/shading/texturing/trans.png)
+
+**Reflection maps** either can create an environment texture to apply to the object to make it look like it is surrounded by that environment or can affect how the real reflections of the object will behave. 
+
+**Displacement maps** are grayscale images that displace the actual geometry to create a new shape.
+
+![tex06](img/maya/shading/texturing/disp.png)
+
+**Normal maps**, like bump maps, make a surface look textured. But unlike the bump map, which is a grayscale image, a normal map is a red, green, and blue image. Normal maps are used today in video games to create textured surfaces in a real-time rendering engine. The original black-and-white bump map was not able to create this effect in real time.
+
+## UVs
+UVs are 2D representations of a 3D object. There is a problem with wrapping a 2D image (a texture) around a 3D object, and UV mapping helps with this problem: UVs are directly related to vertices on a polygon and NURBS, but the UVs cannot be manipulated in 3D space; they are tied to a 2D coordinate plane and edited in a UV editor.
+
+>UV stands for the horizontal (U) and vertical (V) coordinates of the 2D coordinate map space that is applied to a 3D object.
+
+Example of a 3D human model with the UV map.
+
+![uv01](img/maya/shading/texturing/uv01.png)
+
+(a) Planar, (b) cylindrical, (c) spherical, and (d) automatic mapping of a human model.
+
+![uv02](img/maya/shading/texturing/uv02.png)
+
+A human head model with a uniform UV map and a nonuniform UV map.
+
+![uv03](img/maya/shading/texturing/uv03.png)
+
+## Maya Standard Shaders and mental ray Materials
+The most often used standard shaders are Blinn, Lambert, Phong, Phong E, and Anisotropic. You can use any of these shaders when rendering with mental ray.
+
+![mm01](img/maya/shading/texturing/my.png)
+
+The shaders will work only when rendering with mental ray.
+
+![mm02](img/maya/shading/texturing/mr.png)
+
+### Hypershade Editor.
+
+![mat01](img/maya/shading/hypershade.png)
+
+## Making
+### Goal
+
+-	Assign a shading material with specific color and surface attributes.    
+-	Assign a texture map to a surface.         
+-	Use the Hypershade editor to view and work with shading materials.     
+-	Control the placement of a 3D texture using a 3D manipulator.   
+
+### Practice I: Shading attributes & Textures
+![check](img/maya/shading/texturing/cheker.png)
+
+Using **IPR (Interactive Photorealistic Render)**: As you work with shading, you’ll find many attributes that have no effect in the scene view, because the scene view is a rough approximation of how the scene will render.
+
+The IPR renderer is ideal for testing shading. It shows the results of all changes you make to shading and shows them immediately. However, some attribute changes such as reflectivity and reflections are not displayed by the Material Sample.	 
+
+![pr](img/maya/shading/texturing/ipr.png)
+
+More textures:
+
+![tx01](img/maya/shading/texturing/ColorChart.jpg)
+![tx02](img/maya/shading/texturing/MARBLE_9.JPG)
+![tx03](img/maya/shading/texturing/WOOD_1.JPG)
+![tx04](img/maya/shading/texturing/CLOUD_1.jpg)
+
+1127/29
+### Practice II: Creating eye 
+#### Reference
+![ana](img/maya/shading/texturing/iris.jpg)
+
+Image from [Only Eyes Knew](http://www.onlyeyesknew.com/eye-anatomy/).    
+
+[Adam Baroody](http://www.3dluvr.com/rogueldr/tutorials/eye/eyes.html),     
+[Lauren Newman](http://lauren-animation.blogspot.kr/2010/04/character-references-owner.html)
+
+A. Create eye shading using ramp + fractal textures: [tutorial](http://www.spafi.org/index.php?option=com_content&task=view&id=449&Itemid=29F): An Eye Texture written by Danny McNezmo
+
+![eye](img/maya/shading/texturing/eye_color.png)
+
+1. Create a nurbs sphere and **rotate it in Z direction about 90 degrees**.     
+2. Open the Hypershade and create a new blinn material and assign it to the sphere.    
+3. **Press 6 to see textures in your work view**. Select the sphere and in the attribute editor click on the checker icon next to the color and in 2d textures choose the Ramp.      
+4. In the Ramp Attributes **set the Type on U Ramp and Interpolation on Bump**. Change the colors of the ramp to black and white. Make sure your ramp contains **four colors**. Set their distance roughly as in the picture.    
+5. Select the circle icon on the ramp which represents the second color. **Click on the checker icon next to the Selected Color** and from the 2d Textures nodes choose **the Fractal**.    
+6. Now make a test rendering. You can play a bit more with the setup of **the Fractal Attributes** and **the Color Balance**.
+The color of an eye pupilla can be changed in the Fractal tab of the attribute editor. Go into the Color Balance and pick the new color of the Color Gain attribute.
+
+B. Create eye shading using color + specular textures: 
+
+![eye01](img/maya/shading/texturing/eyeball.png)
+
+1. Using **Projection utility** to locate a texture onto the geometry. 
+    
+	- Prepare textures in the sourceimage folder    
+	- Create a geometry and assign a Blinn shader    
+	- Color attribute -> Projection utility -> image link     
+	- and Projection utility -> Fit To BBox -> create place3DTexture    
+
+	![3Dm](img/maya/shading/texturing/3Dm.png)
+
+2. Modeling of the eyeball   
+ 
+	- Create Nurbs ball (rx 90, radius 3, spans 16, ty 3), delete History, freeze Transformation.    
+	- Duplicate one eyeball & save in a different layer.    
+	- Choose one ball & select its Isoparm to Detach it to make Cornea
+
+3. Shading the eyeball
+
+131204
+### Practice I: UV Texture (Window / UV Texture Editor)
+3D software uses u- and v-coordinates to determine how textures should be applied to 3D objects. **UV mapping** refers to the process of determining these coordinates for polygon objects. **UV layout** is a term that refers to the 2D configuration of the UVs on a surface. In the **UV Texture Editor**, u-coordinates are plotted along the horizontal axis, and v-coordinates are plotted along the vertical axis.
+
+NURBS surfaces have implicit UVs; this means that the coordinates are built into the parameterization of the surface. UV texture coordinates do not have to be created for NURBS surfaces; only polygon and subdivision surfaces require mapped UVs.
+
+**UV maps** act as a guide for the placement of images. 
+
+![dice](img/maya/shading/texturing/dice.jpg), ![uv](img/maya/shading/texturing/uveditor.png)
+
+#### Let's practice simple **Expressions** and **MEL**
+
+**Expressions:** program-like instructions you create to control keyable attributes over time. Expressions can be comprised of mathematical equations, conditional statements, or MEL™ commands.    
+Although you can create an expression to animate attributes for any purpose, they’re ideal for attributes that you want to change incrementally, randomly, or rhythmically over time. (Window / Animation Editors / Expression Editor)
+
+##### - Control **sin** function 
+Example - change **Ball.translateX** to **time**. 
+![ex](img/maya/shading/texturing/comp_mel217_1.png)
+
+**MEL** is a scripting language at the heart of Maya. Maya’s user interface is created using MEL, and MEL provides an easy way to extend the functionality of Maya. Everything you can do using Maya’s graphical interface can be automated and extended using MEL. Familiarity with MEL can deepen your understanding of and expertise with Maya.
+
+##### - Let's use looping statement
+	for ($i = 1; $i < 10; $i++) {
+		}
+
+### Practice II: Create UVs (Polygons // Create UVs)
+Using different mapping methods and check the UV Texture Editor.
+
+### Practice III
+	1. Save UV texture (UV Texture Editor // Polygons / UV Snapshot... )     
+	2. Create PSD Nexwork... (Hypershade // Edit / Create PSD Neswork...)
+
+![3dp](img/maya/shading/texturing/3dpaint.png)
+The bumps and folds of a sculpture are roughed in with the 3D Paint tool.
+
+### Practice IV: 3D paint (Rendering // Texturing / 3D Paint Tool)
+
+## Review
+- [Tumblr](http://ant3012.tumblr.com/)
+
+## AD
+Internship opportunity in Winter at Digital Idea ([link 1](http://www.digitalidea.co.kr/en/index.asp), [link II](http://blog.naver.com/PostView.nhn?blogId=kobuta77&logNo=140109033329), [facebook](https://www.facebook.com/digitalideavfx?ref=stream&hc_location=timeline))
+
+- Area: Project coordinator, Match move, Modeling, Rotoscoping     
+- Period: Dec 23 ~ Feb 21    
+- Requirement: Submit one page [cover letter](http://www.career.vt.edu/JobSearchGuide/CoverLetterSamples.html) + your cv + portfolio, which can show your original creations relevant to the area in which you hope to work to **haruoneday at gmail.com** by **Dec 4th**. The review process will start from 5th morning.
+ 
+- The selection process will be conducted by Prof. Ji and Digital Idea.
+
+- **If you decide to apply, please register the Internship winter course (3 credits in A&T (전공)) by Nov 29th** or, if you are over Junior, you have an option to register as 'field training (현장실습)' course (3 credits in general. (교양)). Once it turns out, you will not do the internship, you can cancel the course later. 
+
+TED-X Conference
+Nov 27 from 6pm
+[Facebook link](https://www.facebook.com/TEDxSogangU)
+
+한이음 Expo (NEWTON, AOSOS)
+Nov 28~29 Samsung Coex B1 Hall
+[Hanium Expo](http://www.haniumexpo.co.kr/)
+
+Art & Technology Conference 
+Nov 30 Saturday
+[Facebook link](https://www.facebook.com/2013atc)
+
+## Homework
+1122 - Submit your five shading experiment render image to Tumblr by next class. If you find a good tip, please share with others.
+
+1129 - Submit your eye shading with face mask modeling to Tumblr by next class. Please write your school id and name. If you use a good tutorial, please indicate it to share with others.
+
+1129 - Prepare your final project: submit your interpretation to the subject 'Time' (concept) & main technique & schedule. Submit one pdf which shows your plan for the final project. Due by Dec. 4. to haruoneday@gmail.com
+
+1204 - Upload your dice animation to Tumblr by 1206 (with **your expression + MEL code** + your name + school ID).
+ 
+## Next Class
+1029 - UV texturing    
+1204 - Ambient Occlusion in May
+
+## Notice for the final project
+- Let's start to prepare the final project which can imply your interpretation of 'Time'.
+
+</div>
+<div id="wrapper">
+	
+	<div class="header">
+		
+		<h1>ANT3012</h1>		
+		<a href="index.html">Overview</a><br/><br/>
+
+		<a href="mayafundt.html">Maya Fundamental</a><br/>
+		<a href="mayaNURBs.html">Maya NURBs</a><br/>
+		<a href="mayaPoly01.html">Maya Polygon I</a><br/>
+		<a href="mayaShade.html">Maya Shading I & Lighting</a><br/>
+		<a href="mayaPoly02.html">Maya Polygon II</a><br/>
+		<a href="mayaTexture.html">Maya ShadingII: Texturing</a><br/>
+		<a href="mayaRender.html">Maya Rendering</a><br/>
+		<a href="mayaDynamics.html">Paint Effects</a><br/>		<br/>
+		
+		<a href="eyetex.zip">Eye texture file</a><br/>
+
+	</div>
+	<div class="section">
+		<script type="text/javascript">
+		//var converter = new Markdown.Converter();
+		var converter = new Showdown.converter();
+		document.write(converter.makeHtml($('#sourcetext').text()));
+		</script>
+	</div>
+	
+	<div class="footer">HyunKyung (Haru) Ji, 2013</div>
+	
+</div>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>3D Modeling and Texturing</title>
+    
+<link href="css/site.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="css/highlight.default.css" media="screen" rel="stylesheet" type="text/css" />
+  
+<script src="js/jquery.js"></script>
+<script src="js/showdown.js" type="text/javascript"></script>
+
+<link rel="icon" type="image/x-icon" href="favicon.ico" />
+</head>
+<body>
+<!--
+Write the markdown code below.
+A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
+-->
+
+<div style="display: none" id="sourcetext">
+
+# Maya review
+More on [normal maps](http://en.wikipedia.org/wiki/Normal_mapping).
+
+![nor01](img/800px-Normal_map_example_with_scene_and_result.png)
+![nor02](img/800px-Normal_map_example.png)
+
+# Maya fundamentals
+Complete Maya Programming: An Extensive Guide to MEL and the C++ API, 2003    
+Introducing Maya, 2011
+
+>A solid foundation in the fundamental Maya concepts will greatly ease your development efforts..  Maya allows you to "do it the wrong way." Since the Maya framework is extremely flexible, it rarely places strict guidelines on how you should achieve a particular task. This is extremely attractive, since almost any problem can be tackled from a variety of different angles.
+
+### Maya architecture
+A broad overview of how Maya works internally.
+
+![system](img/maya/mayasystem.png)
+
+Maya has a very flexible workflow that doesn't impose very many constraints. For the most part there is more than one way to approach a particular problem. This means that you can use whichever approach is most suited to your needs. In time, you will learn how to create your very own custom workflows. 
+
+The majority of the MEL commands operate on the Dependency Graph. The reason for this is that the Dependency Graph can be intuitively thought of as the entire ***scene*** including animation, models, textures, lights, cameras, and so on. The scene is all the important data and information that make up the 3D world, including the objects, animation, dynamics, materials, and so on. Not only does the Dependency Graph define what data is in the current scene, its very structure and layout define how data is processed. The Dependency Graph is really the heart and brains of Maya.
+
+### The Dependency Graph
+
+Alias I Wavefront (before Autodesk) implemented Maya's core using this data flow paradigm. This core is physically embodied in the **Dependency Graph**. The data flow paradigm provides an intuitive framework for understanding how Maya works. 
+
+The DG provides for all the fundamental building blocks. It allows you to create arbitrary data that is fed into a series of operations and that results in some processed data at the other end. The data and their operations are encapsulated in the DG as *nodes*. 
+    	
+![node01](img/maya/node.png)
+
+**A node** holds any number of slots that contain the data used by Maya. Nodes also contain an operator that can work on their data and produce some other data as a result.     
+
+![node02](img/maya/snode.png)
+![node12](img/maya/box.png)
+
+In order to perform some complex modification to some data, you'd create **a network of these simple nodes**. 
+There is no restriction on the number of nodes and how they are connected, so you can create networks of arbitrary complexity. Much as a series of simple Lego blocks can be combined to created complex structures, so can Maya nodes be connected to create **complex data flows**.   
+![addnode](img/maya/dg.png)  
+![node03](img/maya/aninode.png)
+![node04](img/maya/anistr.png)
+![node05](img/maya/shape.png)
+
+### Object Hierarchy    
+![hir01](img/maya/parent.png)    
+![hir02](img/maya/hie.png)    
+![hir03](img/maya/hier01.png)     
+
+### 3-D world
+The 3D world in computer graphics applications is visualized using the Cartesian Coordinate System.
+![3D01](img/maya/righthand.png),![3D02](img/maya/righthand01.png)
+
+### Class utility set-up
+- Using Tumblr blog for the class, in order to share and to make comments.   
+  [Tumblr blog](http://ant3012.tumblr.com/)
+- Class Survey I to have a quick feedback.    
+[Link to the Survey I](https://docs.google.com/forms/d/1--GImYbxATtxClRg6g2BdsG5uP-Xju-aLqYbk8Ma6I0/viewform)
+- Ad for the art & technology seminar next Monday 11 am
+Arthru Clay, a director and art chair of [DigitalArtWeek festival](http://www.digitialartweeks.ethz.ch) and SIGGRAPH asia HK 2014
+
+### Maya Interface
+
+[Maya 2014 online Help](http://download.autodesk.com/global/docs/maya2014/en_us/)   
+ 
+![interface01](img/maya/inteface.png)
+
+- Main menu
+
+![interface02](img/maya/same.png)
+![interface03](img/maya/same01.png)    
+
+- Modulers
+ 
+![interface04](img/maya/polym.png)
+![interface05](img/maya/surm.png)
+![interface06](img/maya/renm.png)
+![interface07](img/maya/dym.png)
+![interface08](img/maya/ndym.png)
+
+- Top area
+
+![interface09](img/maya/mainm.png)
+
+- Bottom area
+
+![bt01](img/maya/interface/ts.png)
+![bt02](img/maya/interface/cl.png)
+
+- Manipulators for transformation / Left area
+
+![interface10](img/maya/manip.png)
+![interface11](img/maya/transform.png)
+
+- Navigating in Maya / Center area
+
+![nv01](img/maya/interface/fp.png)
+![nv02](img/maya/interface/perspective.png)
+
+- Right area
+
+![ra01](img/maya/interface/chb.png)
+![ra02](img/maya/interface/ly.png)
+
+#### Panels and Editors in Maya
+![ed01](img/maya/interface/outl.png)
+![ed02](img/maya/interface/hpg.png)
+![ed03](img/maya/interface/hpg01.png)
+![ed04](img/maya/interface/g.png)
+![ed05](img/maya/interface/se.png)
+
+- Preference
+
+![pr01](img/maya/interface/pref.png)
+
+- Tool set-up and Attribute editor
+
+![to01](img/maya/interface/tools.png)
+![to02](img/maya/interface/ae.png)
+![to03](img/maya/interface/ae01.png)
+
+- Hotbox/marking menu, floating menu and Help
+![me01](img/maya/interface/hot.png)
+![me02](img/maya/interface/fm.png)
+![me03](img/maya/interface/h.png)
+
+## Homework
+- Review & redo today's class
+
+## Next Class
+- Start the first project: NURBS modeling
+
+</div>
+<div id="wrapper">
+	
+	<div class="header">
+		
+		<h1>ANT3012</h1>		
+		<a href="index.html">Overview</a><br/><br/>
+
+		<a href="mayafundt.html">Maya Fundamental</a><br/>
+		<a href="mayaNURBs.html">Maya NURBs</a><br/>
+		<a href="mayaPoly01.html">Maya Polygon I</a><br/>
+		<a href="mayaShade.html">Maya Shading I & Lighting</a><br/>
+		<a href="mayaPoly02.html">Maya Polygon II</a><br/>
+		<a href="mayaTexture.html">Maya ShadingII: Texturing</a><br/>
+		<a href="mayaRender.html">Maya Rendering</a><br/>
+		<a href="mayaDynamics.html">Paint Effects</a><br/>		<br/>
+
+	</div>
+	<div class="section">
+		<script type="text/javascript">
+		//var converter = new Markdown.Converter();
+		var converter = new Showdown.converter();
+		document.write(converter.makeHtml($('#sourcetext').text()));
+		</script>
+	</div>
+	
+	<div class="footer">HyunKyung (Haru) Ji, 2013</div>
+	
+</div>
+</body>
+</html>
