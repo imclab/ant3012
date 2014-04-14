@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>3D Modeling and Texturing</title>
+    
+<link href="css/site.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="css/highlight.default.css" media="screen" rel="stylesheet" type="text/css" />
+  
+<script src="js/jquery.js"></script>
+<script src="js/showdown.js" type="text/javascript"></script>
+
+<link rel="icon" type="image/x-icon" href="favicon.ico" />
+</head>
+<body>
+<!--
+Write the markdown code below.
+A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
+-->
+
+<div style="display: none" id="sourcetext">
+
+# Virtual Filmmaking  
+
+Mastering Autodesk Maya 2013 Chapter 2    
+Help file [Maya 2014 online    Help](http://download.autodesk.com/global/docs/maya2014/en_us/), [Maya tutorial files](http://usa.autodesk.com/adsk/servlet/index?siteID=123112&id=9502844&linkID=9242256)
+
+### The virtual cameras in Maya.
+>*As with all filmmaking, the story is told through the camera.*
+
+Although the technical aspects of using the cameras are not difficult to learn, mastering the art of virtual cinematography can take years of practice.
+
+### Practice in Maya
+
+1. Determine the image size and film speed of the camera
+	- The final size of the rendered image (image sequence) as well as the film speed (frames per second). 
+	- Render Settings window
+		- Image size: the number of pixels on the horizontal axis by the number of pixels on the vertical axis. 
+		- Resolution: how many pixels fit within an inch. (Computer screen resolution vs. Print resolution)
+		- Image Aspect Ratio: the ratio of width over height. An image that is 720 by 540 has a ratio of 1.333.
+		- Pixel Aspect Ratio: the ratio of the actual pixel size. Computer monitors use square pixels: the height of the pixel is 1, and the width of the pixel is 1; thus, the pixel aspect ratio is 1. Standard video images use nonsquare pixels that are 1 pixel high by 1.1 pixels wide, giving them a pixel aspect ratio of 0.9.
+		- Device Aspect Ratio: the image aspect ratio multiplied by the pixel aspect ratio. For a video image that is 720 by 486 (1.48) using nonsquare pixels (0.9), this would be 1.48 × 0.9 = 1.333.
+
+2. Create and animate cameras
+	- When you add a camera to a scene, you should imagine how the shot will be composed and whether the camera will be animated. 
+	> ***Animatics***    
+	> An animatic is a film industry term referring to a rough animation designed to help plan a shot, like a moving storyboard. Typically, models in an animatic are very low resolution and untextured with simple lighting. Animatics are used to plan both computer-generated (CG) and live-action shots. Camera work, timing, and the composition of elements within the frame are the most important aspects of an animatic.
+		
+- Use depth of field and motion blur
+
+	![dof01](img/maya/shading/dof_render.png)
+
+### Depth of Field (DoF) rendering
+
+#### Scene preparation
+ 
+1. Create three plane and five balls on the Cylinder (Create/Polygon Primitives & Edit/Duplicate Special) and align them.
+2. Create a camera with a aim (Create/Cameras/Camera and Aim) and check it at the Outliner (two plane mode -> at the left panel or panels/Layouts/Two Panes Side by Side).
+3. Choose the camera and transform Snapping the Aim to the main focus point of the object). 
+4. Adjust the position of camera (panels/Look through Selected)
+- Choosing Camera properties: (select Camera -> Attribute Editor)	
+	- Angle of View, Near and Far clip, Film Gate 	
+	    	
+	![sp03](img/maya/shading/camera.png)
+	
+5. Measure the distance between main object to the camera (Create/Measure Tools/Distance Tool)
+6. Use the distance for the Focus Distance in the Attribute Editor of the camera
+	- Check Depth of Field (select Camera -> Attribute Editor), change the Focus Distance and F Stop
+
+	![sp04](img/maya/shading/dof.png)
+
+7. Render the scene. Do the basic render settings.
+	- Choosing Rendering properties: (Window/Rendering Editors/Render Settings)
+	- Work on Common settings
+		- File name, Image format, Choose camera, Choose Image Size
+		![sp01](img/maya/shading/render_common.png)
+		
+	- Work on Specific settings -> Maya Software
+		- Quality, Anti-aliasing, Raytracing, Motion Blur
+		![sp02](img/maya/shading/render_maya.png)
+		
+### Inspirational source: [Limbo](http://limbogame.org/media/)
+
+### Review: [Tumblr](http://2014ant3012.tumblr.com/) 
+
+___________________________
+
+</div>
+<div id="wrapper">
+	
+	<div class="header">
+		
+		<h1>ANT3012</h1>		
+		<a href="index.html">Overview</a><br/>
+		<a href="intro.html">Introduction</a><br/><br/>
+
+		<a href="mayafundt.html">Maya Fundamental</a><br/>
+		<a href="mayaNURBs.html">Maya NURBs</a><br/>
+		<a href="mayaPoly01.html">Maya Polygon I</a><br/>
+		<a href="mayaShade.html">Maya Shading & Lighting I</a><br/>
+		<a href="maya_vrfilmking.html">Virtual Filmmaking</a><br/>			
+	<!--			<a href="mayaPoly02.html">Maya Polygon II</a><br/>
+		<a href="mayaTexture.html">Maya ShadingII: Texturing</a><br/>
+		<a href="mayaRender.html">Maya Rendering</a><br/>
+		<a href="mayaDynamics.html">Paint Effects</a><br/>		<br/>--!>
+
+	</div>
+	<div class="section">
+		<script type="text/javascript">
+		//var converter = new Markdown.Converter();
+		var converter = new Showdown.converter();
+		document.write(converter.makeHtml($('#sourcetext').text()));
+		</script>
+	</div>
+	
+	<div class="footer">HyunKyung (Haru) Ji, 2014</div>
+	
+</div>
+</body>
+</html>

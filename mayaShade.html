@@ -33,13 +33,6 @@ Direct (local) illumination is only the light provided directly from a light sou
 ![gl02](img/maya/shading/illum.png)
 
 Ray tracing is a technique for generating an image by tracing the path of light through pixels in an image plane and simulating the effects of its encounters with virtual objects. The technique is capable of producing a very high degree of visual realism, usually higher than that of typical scanline rendering methods, but at a greater computational cost.[-wikipedia](http://en.wikipedia.org/wiki/Ray_tracing_(graphics))
-
-### Cornell box
-![cl01](img/maya/shading/cornell.png)
-
-The Cornell box is a test aimed at determining the accuracy of rendering software by comparing the rendered scene with an actual photograph of the same scene, and has become a commonly used 3D test model. [-wikipedia](http://en.wikipedia.org/wiki/Cornell_Box) 
-
-Cornell box lighting examples: [1](http://courses.cs.washington.edu/courses/cse557/08wi/projects/final/artifacts/jjohn-isdal/), [2](http://graphics.ucsd.edu/~henrik/images/cbox.html)
 		
 ### Light sources in Maya		
 Maya has a number of light sources that let you achieve a wide variety of lighting effects.
@@ -58,8 +51,8 @@ Light Attribute Editor
 
 The color of the objects we see in the natural world is a result of the way objects interact with light. When a light wave strikes an object, it can be absorbed, reflected, or refracted by the object. All objects have a degree of reflection and absorption.
 
-![light05](img/maya/shading/lightwave.png)
-Image from http://physics.tutorvista.com/light.html
+![light05](img/maya/shading/lightwave.png)    
+[Image from TutorVista.com](http://physics.tutorvista.com/light.html)
 
 ![light06](img/maya/shading/diffuseplus.png)
 ![light07](img/maya/shading/refractionplus.png)
@@ -75,9 +68,12 @@ You can also create decay effects not seen in the real world (only for a Spot li
 ![decay02](img/maya/shading/decay01.png)
 
 ### Creating Shadows
-- Define from light sources
-
+- Define from light sources.
 ![shadow01](img/maya/shading/shadow.png)
+### Creating Soft Shadow
+![shadow](img/maya/shading/softshadow.png)    
+Example of depth map soft shadow: increase the filter size.
+
 ## Materials
 ### Creating Materials and Textures	
 
@@ -92,7 +88,39 @@ Maya material attribute editor and how to link textures
 ![mat04](img/maya/shading/shading.png)
 
 Hypershade Editor
-![mat01](img/maya/shading/hypershade.png)	
+
+![mat01](img/maya/shading/hypershade.png)
+
+## Camera properties:
+
+- Create a camera with a aim (Create/Cameras/Camera and Aim) and check it at the Outliner (two plane mode -> at the left panel or panels/Layouts/Two Panes Side by Side).
+- Choose the camera and transform Snapping the Aim to the main focus point of the object). 
+- Adjust the position of camera (panels/Look through Selected)
+- Choosing Camera properties: (select Camera -> Attribute Editor)	
+	- Angle of View, Near and Far clip, Film Gate   
+	  	
+	![sp03](img/maya/shading/camera.png)
+	
+## Reder Settings
+To render the scene, check the Render Settings.(Window/Rendering Editors/Render Settings)
+	
+- Work on Common settings
+	- File name, Image format, Choose camera, Choose Image Size		
+	![sp01](img/maya/shading/render_common.png)
+		
+- Work on specific renderer settings -> Maya Software
+	- Quality, Anti-aliasing, Raytracing, Motion Blur
+	![sp02](img/maya/shading/render_maya.png)
+
+## Mid-term
+- **April 23rd: Quiz**
+
+- Submit **a folder** including 1. a rendering image (Full HD: 1024 * 768, using one of jpg / png / tif) of your room (naturally) or object (unique), 2. one pdf showing your sketch + research/references. 
+- Please name your folder as: **school id_your name\_submission date\_midterm**
+- Please name all your documentation as: **your name\_submission date\_title** 
+- Due date: **April 25 12pm**	
+
+- Check for your homework submission: 1. one pdf of your inspirational work 2. NURBs glass 3. NURBs cup 4. Apple 5. 3D text with boolean operation 6. desk sketch 
 
 -------------------------
 
@@ -109,7 +137,8 @@ Hypershade Editor
 		<a href="mayafundt.html">Maya Fundamental</a><br/>
 		<a href="mayaNURBs.html">Maya NURBs</a><br/>
 		<a href="mayaPoly01.html">Maya Polygon I</a><br/>
-		<a href="mayaShade.html">Maya Shading I & Lighting</a><br/>
+		<a href="mayaShade.html">Maya Shading & Lighting I</a><br/>
+		<a href="maya_vrfilmking.html">Virtual Filmmaking</a><br/>	
 		<!--	<a href="mayaPoly02.html">Maya Polygon II</a><br/>
 		<a href="mayaTexture.html">Maya ShadingII: Texturing</a><br/>
 		<a href="mayaRender.html">Maya Rendering</a><br/>
