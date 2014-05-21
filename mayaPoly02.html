@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>3D Modeling and Texturing</title>
+    
+<link href="css/site.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="css/highlight.default.css" media="screen" rel="stylesheet" type="text/css" />
+  
+<script src="js/jquery.js"></script>
+<script src="js/showdown.js" type="text/javascript"></script>
+
+<link rel="icon" type="image/x-icon" href="favicon.ico" />
+</head>
+<body>
+<!--
+Write the markdown code below.
+A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
+-->
+
+<div style="display: none" id="sourcetext">
+
+[Maya 2014 online Help](http://download.autodesk.com/global/docs/maya2014/en_us/) 
+
+### Polygon modeling example
+ 
+![poex03](img/maya/polygon/furtest09.png)
+
+- Polygon modeling: M.C.Escher face modeling create by Haru Ji, 2002. 
+
+![poexsm01](img/maya/polygon/Escher_side.jpg)  
+![poexsm02](img/maya/polygon/Escher_side02.jpg)   
+![poexsm03](img/maya/polygon/Escher_45.jpg)  
+
+- Smoothing
+
+
+![poex01](img/maya/polygon/front.jpg)  ![poex02](img/maya/polygon/side.jpg) 
+
+- Reference
+
+# Face anatomy
+## Proportion
+![ana01](img/maya/polygon01/leonardo.png)  
+[Leonardo da Vinci's anatomical drawings](http://nancyveloaskin.blog32.fc2.com/blog-entry-595.html)
+
+![ana02](img/maya/polygon01/anatomy01.png) 
+[t.h. sketchbook](http://tanhend.blogspot.kr/2012/08/head-anatomy-proportion-and-design.html)
+
+![ana03](img/maya/polygon01/anatomy02.png) 
+![ana05](img/maya/polygon01/anatomy04.png) 
+
+[idrawdigital](http://www.idrawdigital.com/2009/01/drawing-tutorial-adult-child-proportions/)
+Image from Figure Drawing for All It's Worth by Andrew Loomis. [Amazon.com](http://www.amazon.com/gp/product/B000NNFLWQ?ie=UTF8&tag=wwwidrawdigit-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=B000NNFLWQ)
+
+![ana04](img/maya/polygon01/anatomy03.png) 
+
+More on [Pinterest](http://www.pinterest.com/tompaints/figure-drawing-proportions/)
+
+In terms of age:
+![ana06](img/maya/polygon01/anatomy_age.png) 
+
+Another reference for proportional design of character face:    
+[Polycount Forum](http://www.polycount.com/forum/showthread.php?p=1737339),    
+[Portfolio thread](http://www.polycount.com/forum/showthread.php?t=127986), 
+
+General character design:     
+[concept cookie](http://cgcookie.com/concept/cgc-courses/female-character-series/)
+
+## Muscle 
+![muc04](img/maya/polygon01/head02.png) 
+
+Image from ZBrush® Digital Sculpting: Human Anatomy.
+
+![muc03](img/maya/polygon01/head01.png) 
+![muc04_01](img/maya/polygon01/skeleton.png)
+
+![muc05](img/maya/polygon01/face01.png) 
+![muc06](img/maya/polygon01/face02.png) 
+![muc07](img/maya/polygon01/female.png) 
+
+![muc01](img/maya/polygon01/body01.png)![muc02](img/maya/polygon01/body02.png) 
+
+Images from [anatomytools.com](http://www.anatomytools.com/)
+
+## Contraposto
+**Contrapposto** is an Italian term that means counterpose. It is used in the visual arts to describe a human figure standing with most of its weight on one foot so that its shoulders and arms twist off-axis from the hips and legs. This gives the figure a more dynamic, or alternatively relaxed appearance. It can also be used to refer to multiple figures which are in counter-pose (or opposite pose) to one another. It can further encompass the tension as a figure changes from resting on a given leg to walking or running upon it (so-called ponderation). The leg that carries the weight of the body is known as the engaged leg, the *relaxed* leg is known as the *free* leg. [wikipedia](http://en.wikipedia.org/wiki/Contrapposto)
+
+## Practice
+
+![crpo01](img/maya/polygon/eye01.png)  
+![crpo02](img/maya/polygon/eye02.png)   
+![crpo03](img/maya/polygon/eye03.png)   
+![crpo04](img/maya/polygon/eye05.png)  
+
+### Strategy of organic modeling:    
+- Working with symmetry
+- Using image planes to bring in reference sketches
+- Decomposing complex forms into simpler subcomponents, also known as block modeling
+- Using four-sided polygons
+- Maintaining polygons of relatively uniform size + numbers in pair and aspect ratio
+
+### Toolsets:    
+#### Start
+- Crete polygons **(Polygons // Mesh / Create Polygon Tool)**
+- Tip: Using grid to check general size and proportions **(Display / Grid)**
+- Using Extrude to expand polygon faces **(Polygons // Edit Mesh / Extrude)**,
+Tip: Check **Keep Faces Together**: this option ensures that edges do not separate as they are extruded. 
+- Create eye balls **(Create / NURBS Primitives / Sphere)**
+- Tip: Using **Poly Count** and **Outliner** to check your Polygon data **(Display / Heads Up Display / Poly Count)**
+- Tip: **"g"** key for previous command
+#### Edit
+- Using component mode to move vertices and edges, tip: using selection tool **(Polygons // Select)**
+- Using Lattice deformer **(Animation // Create Deformers / Lattice)**
+- Using Sculpt tool **(Polygons // Mesh / Sculpt Geometry Tool)**
+#### Combine two meshes (eye and nose)
+- Combine multiple geometries to one **(Polygons // Mesh / Combine)**
+- Create faces between geometries **(Polygons // Edit Mesh / Append to Polygon Tool)**
+- Divide faces **(Polygons // Edit Mesh / Split Polygon Tool)**
+#### Create symmetry
+- Align vertices at the center: 1. choose all vertices at the center from top or front view. 2. Sanp to grid, tip: turn off Retain component spacing in the Move tool attribute editor. Check the image:
+
+![move](img/maya/polygon01/movetool.png) 
+
+- Mirror & Merge the geometry **(Polygons // Mesh / Mirror Geometry)**
+
+![move](img/maya/polygon01/merge.png) 
+
+#### Smoothing Polygon surfaces
+- To see a smooth version of the model, choose (Polygons // Normals / Soften Edge)
+- Or create Subdivision sufaces using Subdiv Proxy  **(Polygons // Proxy / Subdiv Proxy)**
+
+### Review
+- [Tumblr](http://2014ant3012.tumblr.com/)
+
+### Inspiration
+- Low poly art: 
+[Timothy J. Reynolds](http://www.turnislefthome.com/33005/324719/work/low-poly-isometrics),
+[Fez](http://www.youtube.com/watch?v=xSZJ71tIbkY),
+[AWWWARDS](http://www.awwwards.com/low-poly-illustration-what-s-the-secret.html),
+[INPRINT](http://cgcookie.com/concept/cgc-courses/female-character-series/)
+
+### Homework
+- Sketches of your character design on the grid paper. Scan & upload to Tumblr.
+- Using your sketches to create polygon modeling and upload to Tumblr.    
+
+</div>
+<div id="wrapper">
+	
+	<div class="header">
+		
+		<h1>ANT3012</h1>		
+		<a href="index.html">Overview</a><br/>
+		<a href="intro.html">Introduction</a><br/><br/>
+
+		<a href="mayafundt.html">Maya Fundamental</a><br/>
+		<a href="mayaNURBs.html">Maya NURBs</a><br/>
+		<a href="mayaPoly01.html">Maya Polygon I</a><br/>
+		<a href="mayaShade.html">Maya Shading & Lighting I</a><br/>
+		<a href="maya_vrfilmking.html">Virtual Filmmaking</a><br/>	
+		<br/><a href="mayaShade01.html">Maya Shading & Lighting II</a><br/>	
+		<a href="mayaTexture.html">Maya Texturing</a><br/>		
+		<a href="mayaPoly02.html">Maya Polygon II: Organic Modeling</a><br/>
+
+	</div>
+	<div class="section">
+		<script type="text/javascript">
+		//var converter = new Markdown.Converter();
+		var converter = new Showdown.converter();
+		document.write(converter.makeHtml($('#sourcetext').text()));
+		</script>
+	</div>
+	
+	<div class="footer">HyunKyung (Haru) Ji, 2014</div>
+	
+</div>
+</body>
+</html>
