@@ -21,7 +21,7 @@ A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
 <div style="display: none" id="sourcetext">
 
 [Maya 2014 online Help](http://download.autodesk.com/global/docs/maya2014/en_us/) 
-
+# Practice I: Creating face 
 ### Polygon modeling example
  
 ![poex03](img/maya/polygon/furtest09.png)
@@ -34,13 +34,12 @@ A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
 
 - Smoothing
 
-
 ![poex01](img/maya/polygon/front.jpg)  ![poex02](img/maya/polygon/side.jpg) 
 
-- Reference
+- Reference photos
 
-# Face anatomy
-## Proportion
+## Face anatomy
+### Proportion
 ![ana01](img/maya/polygon01/leonardo.png)  
 [Leonardo da Vinci's anatomical drawings](http://nancyveloaskin.blog32.fc2.com/blog-entry-595.html)
 
@@ -67,7 +66,7 @@ Another reference for proportional design of character face:
 General character design:     
 [concept cookie](http://cgcookie.com/concept/cgc-courses/female-character-series/)
 
-## Muscle 
+### Muscle 
 ![muc04](img/maya/polygon01/head02.png) 
 
 Image from ZBrush® Digital Sculpting: Human Anatomy.
@@ -83,7 +82,7 @@ Image from ZBrush® Digital Sculpting: Human Anatomy.
 
 Images from [anatomytools.com](http://www.anatomytools.com/)
 
-## Contraposto
+### Contrapposto
 **Contrapposto** is an Italian term that means counterpose. It is used in the visual arts to describe a human figure standing with most of its weight on one foot so that its shoulders and arms twist off-axis from the hips and legs. This gives the figure a more dynamic, or alternatively relaxed appearance. It can also be used to refer to multiple figures which are in counter-pose (or opposite pose) to one another. It can further encompass the tension as a figure changes from resting on a given leg to walking or running upon it (so-called ponderation). The leg that carries the weight of the body is known as the engaged leg, the *relaxed* leg is known as the *free* leg. [wikipedia](http://en.wikipedia.org/wiki/Contrapposto)
 
 ## Practice
@@ -130,20 +129,65 @@ Tip: Check **Keep Faces Together**: this option ensures that edges do not separa
 - To see a smooth version of the model, choose (Polygons // Normals / Soften Edge)
 - Or create Subdivision sufaces using Subdiv Proxy  **(Polygons // Proxy / Subdiv Proxy)**
 
-### Review
+## Review
 - [Tumblr](http://2014ant3012.tumblr.com/)
 
-### Inspiration
+## Inspiration
 - Low poly art: 
 [Timothy J. Reynolds](http://www.turnislefthome.com/33005/324719/work/low-poly-isometrics),
 [Fez](http://www.youtube.com/watch?v=xSZJ71tIbkY),
 [AWWWARDS](http://www.awwwards.com/low-poly-illustration-what-s-the-secret.html),
 [INPRINT](http://cgcookie.com/concept/cgc-courses/female-character-series/)
 
-### Homework
+## Homework
 - Sketches of your character design on the grid paper. Scan & upload to Tumblr.
 - Using your sketches to create polygon modeling.
-- Practice and review your organic modeling you worked at the class.    
+- Practice and review your organic modeling you worked at the class. 
+
+# Practice II: Creating eye 
+### Reference
+![ana](img/maya/shading/texturing/iris.jpg)
+
+Image from [Only Eyes Knew](http://www.onlyeyesknew.com/eye-anatomy/).    
+
+[Adam Baroody](http://www.3dluvr.com/rogueldr/tutorials/eye/eyes.html),     
+[Lauren Newman](http://lauren-animation.blogspot.kr/2010/04/character-references-owner.html)
+
+A. Create eye shading using ramp + fractal textures: [tutorial](http://www.spafi.org/index.php?option=com_content&task=view&id=449&Itemid=29F): An Eye Texture written by Danny McNezmo
+
+![eye](img/maya/shading/texturing/eye_color.png)
+
+1. Create a nurbs sphere and **rotate it in Z direction about 90 degrees**.     
+2. Open the Hypershade and create a new blinn material and assign it to the sphere.    
+3. **Press 6 to see textures in your work view**. Select the sphere and in the attribute editor click on the checker icon next to the color and in 2d textures choose the Ramp.      
+4. In the Ramp Attributes **set the Type on U Ramp and Interpolation on Bump**. Change the colors of the ramp to black and white. Make sure your ramp contains **four colors**. Set their distance roughly as in the picture.    
+5. Select the circle icon on the ramp which represents the second color. **Click on the checker icon next to the Selected Color** and from the 2d Textures nodes choose **the Fractal**.    
+6. Now make a test rendering. You can play a bit more with the setup of **the Fractal Attributes** and **the Color Balance**.
+The color of an eye pupilla can be changed in the Fractal tab of the attribute editor. Go into the Color Balance and pick the new color of the Color Gain attribute.
+
+B. Create eye shading using color + specular textures: 
+
+![eye01](img/maya/shading/texturing/eyeball.png)
+
+1. Using **Projection utility** to locate a texture onto the geometry. 
+    
+	- Prepare textures in the sourceimage folder    
+	- Create a geometry and assign a Blinn shader    
+	- Color attribute -> Projection utility -> image link     
+	- and Projection utility -> Fit To BBox -> create place3DTexture    
+
+	![3Dm](img/maya/shading/texturing/3Dm.png)
+
+2. Modeling of the eyeball   
+ 
+	- Create Nurbs ball (rx 90, radius 3, spans 16, ty 3), delete History, freeze Transformation.    
+	- Duplicate one eyeball & save in a different layer.    
+	- Choose one ball & select its Isoparm to Detach it to make Cornea
+
+3. Shading the eyeball   
+
+## Homework
+- Upload your final modeling of faces and eyes with shadings to Tumblr by next class. 
 
 </div>
 <div id="wrapper">
