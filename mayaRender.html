@@ -22,11 +22,19 @@ A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
 
 ## Review
 - [Tumblr](http://2014ant3012.tumblr.com/)
- 
-# Global Illumination: indirect illumination
 
 [Maya 2014 online Help](http://download.autodesk.com/global/docs/maya2014/en_us/)    
 Reference: Maya® Studio Projects Texturing and Lighting, Mastering Autodesk Maya 2013.
+
+# Rendering
+Rendering is the final stage in the 3D computer graphics production process.
+Though the wider context of rendering begins with shading and texturing objects and lighting your scene, the rendering process ends when surfaces, materials, lights, and motion are processed into a final image or image sequence.
+
+As you build your scenes (shade and texture objects, light scenes, position cameras, and so on), you’ll want to visualize your scene many times before you produce the final rendered image or image sequence. This process may involve (depending on your particular project) creating and setting up additional cameras.
+
+The key to rendering is finding a balance between the visual complexity required and the rendering speed that determines how many frames can be rendered in a given period of time.
+ 
+# Global Illumination: indirect illumination
 
 In reality, **when a ray of light hits an opaque surface, it is either absorbed or reflected (or a little of both) by the surface**. If the light ray is reflected, it reenters the environment and continues to bounce off reflected surfaces until it is absorbed by another surface.      
 As light rays bounce around in an environment, fewer light rays reach the parts that are hidden in corners, cracks, and crevices. The lack of light in these areas creates a type of shadowing known as **ambient occlusion**. 
@@ -54,14 +62,14 @@ When a scene is rendered, photons are traced from each photon-emitting light to 
 
 If a photon survives a hit and is reflected or transmitted, it continues through the scene until it hits another surface. Once again, the photon is absorbed, reflected, or transmitted. This process continues until the surviving photons are stopped by the **Max Photon Depth attribute**, which defines the number of hits permitted per photon. (Max Photon depth is located in the **Render Settings window / Indirect Lighting tab / Photon Tracing section**)
 
-**Photon Reflections** defines the maximum number of times a photon will reflect in a scene. This attribute is overridden by the Max Photon Depth attribute. The first surface encountered is not included in the count. Photon Refractions functions in the same manner but affects the maximum number of photon refractions.
-
 ![gl01](img/maya/rendering/gl/rtd.png)
+
+**Photon Reflections** defines the maximum number of times a photon will reflect in a scene. This attribute is overridden by the Max Photon Depth attribute. The first surface encountered is not included in the count. Photon Refractions functions in the same manner but affects the maximum number of photon refractions.
 
 ### Photon map
 The photons that are culled in a process known as Russian Roulette and thereby absorbed by the surface have their position, incident direction, and energy stored in a special photon map.
 
-To save a photon map, type a name for the map in the Photon Map File field (found in the Photon Map section on the Indirect Lighting tab of the Render Settings window) and create a render (do not add a file extension to the name). When you want to reuse the same map, deselect Rebuild Photon Map. The map is stored in the renderData\mentalray\photonMap directory with the .pmap extension. When you want to overwrite the map, simply select Rebuild Photon Map.
+To save a photon map, type a name for the map in the **Photon Map File field** (found in the Photon Map section on the Indirect Lighting tab of the Render Settings window) and create a render (do not add a file extension to the name). When you want to reuse the same map, deselect Rebuild Photon Map. The map is stored in the renderData\mentalray\photonMap directory with the .pmap extension. When you want to overwrite the map, simply select Rebuild Photon Map.
 
 The map Visualizer allows you to see how the photons are cast in the scene.
 
@@ -90,21 +98,29 @@ The RGB values of its color swatch are multiplied by the Photon Intensity attrib
 
 **Merge Distance** specifies a distance in world space within which overlapping photons are merged. The option is used to reduce the size of photon maps and decrease render times. You should raise this setting by very small increments. It can increase the blotchy look of the render.
 
-## Practice global illumination
+## Final Gather 
+Final Gather is used alone for outdoor scenes or can be combined with GI for the highest-quality results on interior scenes. Final Gather does require your scene to be properly illuminated with some form of direct lighting for it to produce good results. For a pleasing and accurate simulation, you will need perhaps a minimum one-third to one-half of the scene lit with direct light. However when higher settings are used, it can often take much longer than the rendering itself.
+
+![gl05](img/maya/rendering/gl/fg01.png) 
+
+Final Gather employs a specialized variation of raytracing in which each camera eye ray intersection creates sets of Final Gather rays. The Final Gather rays are sent out in a random direction within a hemisphere. The end result is a render that is able to include bounced light and color bleed.
+
+## Practice Global Illumination and Final Gathering
 
 ### Prepare the scene in the right project directory.
 - Let's use the Cornell box and its area light set-up.
 
 ### Render Settings window
+- Choose Mental Ray renderer.
 - In the **Global Illumination** section, select the Global Illumination check box. 
 - In the **Final Gathering** section, temporarily deselect Final Gathering: temporarily disabling Final Gathering will speed up the render as you adjust the various Global Illumination settings.
 
 ### the Attribute Editor tab for the area light
 - In the **Caustic And Global Illumination** section, select **Emit Photons**. Render a test. Each dot represents a photon hit. 
 
-- **The dot** indicates the area of influence the photon has when combining the photon's indirect illumination information with the direct illumination calculation. 
+- The dot indicates the area of influence the photon has when combining the photon's indirect illumination information with the direct illumination calculation. 
 
-- **The dots** are colored, indicating that their energy has been influenced by a surface they have bounced off. For example, the red dots indicate a bounce off a nearby red wall. Hence, a major advantage of Global Illumination is the ability to produce **color bleed**. Although Final Gathering is also used to produce bleed, it is generally more subtle.
+- The dots are colored, indicating that their energy has been influenced by a surface they have bounced off. For example, the red dots indicate a bounce off a nearby red wall. Hence, a major advantage of Global Illumination is the ability to produce **color bleed**. Although Final Gathering is also used to produce bleed, it is generally more subtle.
 
 - Adjust the **Radius** attribute, found in the Global Illumination section of the Render Settings window. By default, Radius is set to 0, which means that Maya automatically selects a Radius value based on the scene size. 
 
@@ -113,13 +129,6 @@ The RGB values of its color swatch are multiplied by the Photon Intensity attrib
 - Reactivate **Final Gathering** by selecting the Final Gathering check box. Final Gathering provides additional smoothing to the Global Illumination indirect illumination and helps hide unblended photon hits.
 
 ![gl04](img/maya/rendering/gl/fg.png) 
-
-## Final Gather 
-Final Gather is used alone for outdoor scenes or can be combined with GI for the highest-quality results on interior scenes. Final Gather does require your scene to be properly illuminated with some form of direct lighting for it to produce good results. For a pleasing and accurate simulation, you will need perhaps a minimum one-third to one-half of the scene lit with direct light. However when higher settings are used, it can often take much longer than the rendering itself.
-
-![gl05](img/maya/rendering/gl/fg01.png) 
-
-Final Gather employs a specialized variation of raytracing in which each camera eye ray intersection creates sets of Final Gather rays. The Final Gather rays are sent out in a random direction within a hemisphere. The end result is a render that is able to include bounced light and color bleed.
 
 ## Caustics
 Global illumination simulates light reflected from diffuse surfaces. Caustics simulate light reflected from glossy and reflective surfaces as well as light that passes through refractive transparent materials. Caustics are calculated completely independently from global illumination; however, the workflow is very similar.
