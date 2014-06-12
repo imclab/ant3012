@@ -138,11 +138,103 @@ Global illumination simulates light reflected from diffuse surfaces. Caustics si
 ## Homework
 - Upload your GI rendering image by next class.
 
+____________________
+
+## Review & Inspiration
+- [Tumblr](http://2014ant3012.tumblr.com/)
+
+Reference:[Tutorial: Ambient Occlusion in Maya - by Alchemist101](http://www.game-artist.net/forums/spotlight-articles/1317-tutorial-ambient-occlusion-maya-alchemist101.html)  
+
+# Maya to Mental Ray Rendering: Ambient Occlusion
+**Ambient occlusion** refers to the blocking of indirect or diffuse light on an object. It refers to the darker areas of the object, typically creases, cracks and crevices. Ambient occlusion is caused by indirect light's inability to bounce around and illuminate areas that are blocked by a nearby object that absorbs the light rays. **These subtle variations in lighting are visual clues for our eyes to detect surface details** and distinctions that would otherwise be washed out and unnoticeable. Ambient occlusion adds realism to your scene by adding shadows in crevices, nooks and crannies, and so on. For each surface point, it calculates how much light is blocked by other geometry.
+
+In the example below, the ice blocks stand out because of the shadowing between them. The cracks between the ice bricks appear darker because the light is blocked by the ice bricks. 
+
+![ao01](img/maya/rendering/comp_igloo_amb_occl_resized.png)
+
+![ao02](img/maya/rendering/comp_occlusion_2.png)![ao03](img/maya/rendering/comp_beautyHead_2.png)![ao03](img/maya/rendering/comp_beauty_occlusion_2.png)
+![ao01](img/maya/rendering/comp_occlusion_rays_2.png)
+
+## Usage
+When ambient light is used, the objects in your scene may appear to be too bright and geometric detail may become lost. Ambient occlusion solves this problem by subtracting ambient light and adding shadowing.
+
+## Making
+#### SETTING UP THE SHADER NETWORK
+- First open the hypershade window and from the Maya nodes list MMB drag a Surface Shader node into the work area.   
+
+![aop01](img/maya/rendering/sshd.png)
+
+- Now change it MentalRay nodes, then under the textures tab MMB drag an '**mib\_amb\_occlusion**' node onto the work area.
+
+![aop02](img/maya/rendering/mib.png)
+
+- Now connect the 'OutValue' of the Occlusion node to the 'OutColor' of the surface shader. This is the default connection between these 2 nodes so you can do this by simply holding down Ctrl and MMB dragging the occlusion node over the shader node. 
+
+![aop03](img/maya/rendering/mib_link.png)
+       
+#### SETTING UP YOUR SCENE
+- In order to get good results from Ambient Occlusion the scene environment must be white. To do this open the Outliner window and select the Persp camera. In the attribute editor under the Environment tab slide the Background Color to 100% white.
+
+![aop11](img/maya/rendering/cam.png)
+
+- Now open the Render Globals window and select MentalRay as your renderer and Production as the quality preset. Now change the multipixel filter to "Lanczos". 
+
+![aop12](img/maya/rendering/lanz.png)
+
+- Now close the render Globals window and assign the 'Surface Shader' you have setup to your model. It should turn the model completely black.
+#### TWEAKING
+- Frame your model and hit render. It should render quickly and look quite grainy.
+- Now we need to tweak the settings a little. Open the attribute editor of the Ambient Occlusion node. 
+- The first setting to change is 'Samples'. Increasing this will remove the grainy look but will drastically increase render times. 256 samples is good for most objects.
+- Do not change the 'Bright' and 'Dark' settings. These affect how light/dark the occlusion value is, but it is a lot better to render with the default extremes and tweak them in Photoshop at a later stage if you need to.
+- The spread setting affects how far the occlusion shadow spreads over the surface. Again the default setting of 0.800 is good for most objects, any lower tends to be too extreme, and a high spread can cause darkening problems when it is multiplied over your colour layers in Photoshop.
+
+![aop13](img/maya/rendering/ae.png)
+
+# Baking a texture + another way to create ambient occlusion map
+[Tutorial link](http://cgi.tutsplus.com/tutorials/baking-ambient-occlusion-color-and-light-maps-in-maya-using-mentalray--cg-11872)
+
+#### USING YOUR BAKED OCCLUSION MAP
+- Once the bake is completed open the project file that you specified earlier.     
+- In that folder select RenderData > MentalRay > lightmap > select your baked texture file and open this with Photoshop.      
+- Drag the Occlusion bake on top of your model's texture layer(s) and select Multiply as the layer blending mode. You may also want to apply a slight Gaussian blur to your occlusion layer, especially if it being used on an organic surface. For hard sharp edged surfaces like this one no blur was applied.
+
+![exr01](img/maya/rendering/AO11.jpg)
+
+#### BAKING OCCLUSION FROM HIGH RES TO LOW RES MODELS
+- Ambient occlusion maps can also be used to compliment normal maps. The occlusion values from a high poly model can be baked to the UV layout of a low poly model. This helps to sell the normal mapped details if used in a subtle way. This function is found in the transfer maps window under lighting/shading in the Render menu set.
+
+![exr02](img/maya/rendering/AO12.jpg), ![exr03](img/maya/rendering/AO15.jpg)
+
+## Render Layer Editor
+When a shot is animated in a 3D program on a professional production, it is rarely rendered out as is. Instead, the shot is divided into layers and/or render passes. In Maya, the Render Layer Editor allows you to create and manage various render layers and render passes.
+
+![rp01](img/maya/rendering/comp_car_luminance.png), ![rp02](img/maya/rendering/comp_car_shadow.png)
+![rp03](img/maya/rendering/comp_car_reflection.png), 
+
+Final realistic render image:
+
+![ex01](img/maya/rendering/GUID-59AF3E15-AFFB-4ABE-BDCC-EED3B16B0B2F-low.png)
+
+## Render Layout Overview 
+
+**A system of per layer and per object** overrides means that objects can have different shading and rendering attributes on different layers.    
+With **render layers**, you can assign any object to multiple layers with a different material on each layer. This lets you create multiple images for each frame, from any combination of Maya's four renderers, third party plug-in renderers, and post- processes such as Fur and Paint Effects. Rendered images can be efficiently organized for output to a compositor. Render layers can be also be rendered to Adobe® Photoshop® (PSD) format, which supports multiple image layers.     
+As well, a preview composite of all the layers can be viewed in the Render View.
+
+
+[Maya help link](http://download.autodesk.com/global/docs/maya2014/en_us/index.html?url=files/Vari_Render_layer_overview.htm,topicNumber=d30e685988)
+
+
+_______________________
+
 ## Final project
 - Submit one folder (yourname\_3Dmodeling) which includes one pdf documentation, the final render image (HD size), maya file + textures by June 22 12pm to yoon\_goo@naver.com. Please name all your documentation as (your name\_title)
 
 - Theme: imply your interpretation of 'Memory' & 'Relations' applying multiple textures in a more complex shading network. 
 - Review: June 25th, 1:30 pm, X-427. 
+
+______________________________________________
 
 </div>
 <div id="wrapper">
